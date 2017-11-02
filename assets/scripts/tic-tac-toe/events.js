@@ -1,3 +1,7 @@
+const getFormFields = require(`../../../lib/get-form-fields`)
+const api = require('./api')
+const ui = require('./ui')
+
 let xTurn = true
 let winner = false
 let xTrack = []
@@ -13,6 +17,8 @@ const win = [
   ['0', '4', '8'],
   ['2', '4', '6']
 ]
+
+$('#sign-up-form').on('submit', onSignUp)
 
 // hide gameboard
 const hideBoard = function () {
@@ -50,6 +56,16 @@ const showSignUp = function () {
 
 $('#sign-in').on('click', showSignIn)
 $('#sign-up').on('click', showSignUp)
+
+// on sign up
+const onSignUp = function (event) {
+  const data = getFormFields(this)
+  console.log(data)
+  event.preventDefault()
+  api.signUp(data)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpFailure)
+}
 
 // check for tie
 const checkTie = function () {
@@ -96,8 +112,6 @@ const startGame = function () {
   squares.map((x) => $('#' + x).on('click', onSquareClick))
   displayTurn()
 }
-
-
 
 // clear gameboard and reset game
 const clearGame = function () {
@@ -148,4 +162,5 @@ hideSignIn()
 hideSignUp()
 
 module.exports = {
+  onSignUp
 }
