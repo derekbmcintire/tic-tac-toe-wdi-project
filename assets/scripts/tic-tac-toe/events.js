@@ -107,6 +107,10 @@ const displayWinner = function () {
   }
 }
 
+/* Sign Up/In/Out API ******************************************/
+
+
+
 module.exports = {
   checkTie,
   switchTurn,

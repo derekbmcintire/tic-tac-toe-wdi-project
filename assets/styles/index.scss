@@ -1,10 +1,11 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
-$off-white: #ECECEA;
-$lighter-blue: #74AFAD;
-$darker-blue: #558C89;
+$off-white: #ececea;
+$lighter-blue: #74afad ;
+$darker-blue: #558c89;
 $orange: #ffa500;
+$black: #000;
 
 * {
   margin: 0 auto;
@@ -22,21 +23,17 @@ body {
 
 button {
   background-color: $off-white;
-  color:$darker-blue;
   border: 2px solid $darker-blue;
-    &:focus {
+  color: $darker-blue;
+  &:focus {
     outline: 2px solid $orange;
   }
 }
 
-button:focus {
-
-}
-
 .container {
   background-color: $lighter-blue;
-  border-left: 3px solid black;
-  border-right: 3px solid black;
+  border-left: 3px solid $black;
+  border-right: 3px solid $black;
   height: 100vh;
   max-width: 800px;
   min-height: 700px;
