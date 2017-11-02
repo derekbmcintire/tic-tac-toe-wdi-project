@@ -1,3 +1,5 @@
+require('./ui.js')
+
 let xTurn = true
 let winner = false
 let xTrack = []
@@ -91,6 +93,7 @@ function checkWin (tracked) {
       tracked.includes(win[i][1]) &&
       tracked.includes(win[i][2])
     ) {
+      endGame()
       return (winner = true)
     }
   }
@@ -101,10 +104,16 @@ const displayWinner = function () {
   if (winner) {
     const winningPlayer = xTurn ? 'Player 2' : 'Player 1'
     $('#info').text(winningPlayer + ' has won!')
-    endGame()
   }
 }
 
 module.exports = {
-
+  checkTie,
+  switchTurn,
+  trackMove,
+  onSquareClick,
+  startGame,
+  clearGame,
+  endGame,
+  checkWin
 }

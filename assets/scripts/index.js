@@ -3,6 +3,8 @@
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
 const events = require('./tic-tac-toe/events.js')
+const ui = require('./tic-tac-toe/ui.js')
+
 
 $(() => {
   setAPIOrigin(location, config)

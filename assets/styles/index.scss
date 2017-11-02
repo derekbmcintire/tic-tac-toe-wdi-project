@@ -20,6 +20,19 @@ body {
   text-align: center;
 }
 
+button {
+  background-color: $off-white;
+  color:$darker-blue;
+  border: 2px solid $darker-blue;
+    &:focus {
+    outline: 2px solid $orange;
+  }
+}
+
+button:focus {
+
+}
+
 .container {
   background-color: $lighter-blue;
   border-left: 3px solid black;
