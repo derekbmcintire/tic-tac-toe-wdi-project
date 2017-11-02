@@ -20,13 +20,22 @@ body {
   text-align: center;
 }
 
+button {
+  background-color: $off-white;
+  color:$darker-blue;
+  border: 2px solid $darker-blue;
+    &:hover {
+    outline: 2px solid $orange;
+  }
+}
+
 .container {
   background-color: $lighter-blue;
   border-left: 3px solid black;
   border-right: 3px solid black;
   height: 100vh;
   max-width: 800px;
-  min-height: 700px;
+  min-height: 800px;
   padding: 10px;
 }
 
@@ -51,6 +60,13 @@ h2 {
 
 h3 {
   margin: 5px;
+}
+
+.log {
+  background: transparent;
+  border: 0;
+  color: $orange;
+  outline: 0;
 }
 
 nav {
