@@ -27,7 +27,32 @@ const showBoard = function () {
 
 hideBoard()
 
-$('#sign-in').on('click', showBoard)
+// hide sign in form
+const hideSignIn = function () {
+  $('#sign-in-form').hide()
+}
+
+// show sign in form
+const showSignIn = function () {
+  $('#button-wrap').hide()
+  $('#sign-in-form').show()
+}
+
+// hide sign up form
+const hideSignUp = function () {
+  $('#sign-up-form').hide()
+}
+// show sign up form
+const showSignUp = function () {
+  $('#button-wrap').hide()
+  $('#sign-up-form').show()
+}
+
+hideSignIn()
+hideSignUp()
+
+$('#sign-in').on('click', showSignIn)
+$('#sign-up').on('click', showSignUp)
 
 // check for tie
 const checkTie = function () {

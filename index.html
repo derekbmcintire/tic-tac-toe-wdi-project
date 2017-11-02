@@ -15,8 +15,10 @@
 
 <body>
 
+<!-- Sign In/Up -->
   <div class="sign-in-container">
     <h1 class='sign-in-title'>Tic Tac Toe</h1>
+    <div id="button-wrap">
     <button class="sign-btn" id="sign-in">
       Sign In
     </button>
@@ -25,6 +27,40 @@
       Sign Up
     </button>
   </div>
+    <!-- Sign In Form -->
+    <form class="sign-in-up" id="sign-in-form">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">Need to <a href="#">sign up</a>?.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <!-- Sign Up Form -->
+    <form class="sign-in-up" id="sign-up-form">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">Need to <a href="#">sign in</a>?.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password Confirmation</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+
 
   <div class="game-container">
     <nav>
