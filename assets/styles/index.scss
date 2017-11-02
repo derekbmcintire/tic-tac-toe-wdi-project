@@ -1,2 +1,86 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+
+* {
+  margin: 0 auto;
+}
+
+body {
+  background-color: #ECECEA;
+  text-align: center;
+}
+
+.container {
+  background-color: #74AFAD;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  height: 100vh;
+  max-width: 800px;
+  min-height: 700px;
+  padding: 10px;
+}
+
+.credit {
+  font-size: 12px;
+}
+
+.game-board-wrap {
+  display: inline-block;
+  margin: 15px auto;
+}
+
+.sq-zero {
+  border-bottom: 3px solid #558C89;
+  border-right: 3px solid #558C89;
+}
+
+.sq-one {
+  border: 3px solid #558C89;
+  border-top: 0;
+}
+
+.sq-two {
+  border-bottom: 3px solid #558C89;
+  border-left: 3px solid #558C89;
+}
+
+.sq-three {
+  border: 3px solid #558C89;
+  border-left: 0;
+  clear: left;
+}
+
+.sq-four {
+  border: 3px solid #558C89;
+}
+
+.sq-five {
+  border: 3px solid #558C89;
+  border-right: 0;
+}
+
+.sq-six {
+  border-right: 3px solid #558C89;
+  border-top: 3px solid #558C89;
+  clear: left;
+}
+
+.sq-seven {
+  border: 3px solid #558C89;
+  border-bottom: 0;
+}
+
+.sq-eight {
+  border-left: 3px solid #558C89;
+  border-top: 3px solid #558C89;
+}
+
+.square {
+  float: left;
+  font-size: 80px;
+  height: 100px;
+  line-height: 100px;
+  margin: 15;
+  width: 100px;
+}
