@@ -48,6 +48,9 @@ const showSignUp = function () {
   $('#sign-up-form').show()
 }
 
+$('#sign-in').on('click', showSignIn)
+$('#sign-up').on('click', showSignUp)
+
 // check for tie
 const checkTie = function () {
   const used = xTrack.concat(oTrack)

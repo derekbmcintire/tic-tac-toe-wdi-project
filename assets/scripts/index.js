@@ -6,8 +6,7 @@ const events = require('./tic-tac-toe/events.js')
 
 $(() => {
   setAPIOrigin(location, config)
-  $('#sign-in').on('click', events.showSignIn)
-  $('#sign-up').on('click', events.showSignUp)
+
 })
 
 // use require with a reference to bundle the file and use it in this file
