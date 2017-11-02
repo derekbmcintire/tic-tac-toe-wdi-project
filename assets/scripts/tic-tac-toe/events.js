@@ -14,6 +14,20 @@ const win = [
   ['2', '4', '6']
 ]
 
+// check for tie
+const checkTie = function () {
+  const used = xTrack.concat(oTrack)
+  if (used.length === 9 && !winner) {
+    $('#info').text('It\'s a tie!')
+  }
+}
+
+// display who's turn it is
+const displayTurn = function () {
+  const currentPlayer = xTurn ? 'X' : 'O'
+  $('#info').text(currentPlayer + '\'s turn!')
+}
+
 // switch turns between X and O
 const switchTurn = () => {
   xTurn ? xTurn = false : xTurn = true
@@ -36,8 +50,10 @@ const onSquareClick = function () {
   trackMove(this)
   checkWin(xTrack)
   checkWin(oTrack)
-  displayWinner()
   switchTurn()
+  displayTurn()
+  displayWinner()
+  checkTie()
 }
 
 // add onClick event to all squares
@@ -47,6 +63,7 @@ const startGame = function () {
   xTrack = []
   oTrack = []
   squares.map((x) => $('#' + x).on('click', onSquareClick))
+  displayTurn()
 }
 
 startGame()
@@ -58,6 +75,7 @@ const clearGame = function () {
   startGame()
 }
 
+// start a new game on button click
 $('#newGame').on('click', clearGame)
 
 // disable all squares at end of game-board-wrap
@@ -79,9 +97,9 @@ function checkWin (tracked) {
 }
 
 // display winner in the info element and disable squares
-function displayWinner () {
+const displayWinner = function () {
   if (winner) {
-    const winningPlayer = xTurn ? 'X' : 'O'
+    const winningPlayer = xTurn ? 'Player 2' : 'Player 1'
     $('#info').text(winningPlayer + ' has won!')
     endGame()
   }
