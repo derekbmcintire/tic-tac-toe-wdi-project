@@ -25,7 +25,7 @@ const showBoard = function () {
   $('.game-container').show()
 }
 
-hideBoard()
+$('#skip').on('click', showBoard)
 
 // hide sign in form
 const hideSignIn = function () {
@@ -48,24 +48,12 @@ const showSignUp = function () {
   $('#sign-up-form').show()
 }
 
-hideSignIn()
-hideSignUp()
-
-$('#sign-in').on('click', showSignIn)
-$('#sign-up').on('click', showSignUp)
-
 // check for tie
 const checkTie = function () {
   const used = xTrack.concat(oTrack)
   if (used.length === 9 && !winner) {
     $('#info').text('It\'s a tie!')
   }
-}
-
-// display who's turn it is
-const displayTurn = function () {
-  const currentPlayer = xTurn ? 'X' : 'O'
-  $('#info').text(currentPlayer + '\'s turn!')
 }
 
 // switch turns between X and O
@@ -106,7 +94,7 @@ const startGame = function () {
   displayTurn()
 }
 
-startGame()
+
 
 // clear gameboard and reset game
 const clearGame = function () {
@@ -136,6 +124,12 @@ function checkWin (tracked) {
   }
 }
 
+// display who's turn it is
+const displayTurn = function () {
+  const currentPlayer = xTurn ? 'X' : 'O'
+  $('#info').text(currentPlayer + '\'s turn!')
+}
+
 // display winner in the info element and disable squares
 const displayWinner = function () {
   if (winner) {
@@ -145,6 +139,10 @@ const displayWinner = function () {
   }
 }
 
-module.exports = {
+startGame()
+hideBoard()
+hideSignIn()
+hideSignUp()
 
+module.exports = {
 }
