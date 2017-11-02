@@ -30,17 +30,40 @@ const trackMove = function (square) {
 
 // add symbols to board and disable click function
 const onSquareClick = function () {
-  let currentSymbol = xTurn ? 'X' : 'O'
-  $(this).text(currentSymbol)
+  const currentLetter = xTurn ? 'X' : 'O'
+  $(this).text(currentLetter)
   $(this).off('click')
   trackMove(this)
-  switchTurn()
   checkWin(xTrack)
   checkWin(oTrack)
+  displayWinner()
+  switchTurn()
 }
 
 // add onClick event to all squares
-squares.map((x) => $('#' + x).on('click', onSquareClick))
+const startGame = function () {
+  xTurn = true
+  winner = false
+  xTrack = []
+  oTrack = []
+  squares.map((x) => $('#' + x).on('click', onSquareClick))
+}
+
+startGame()
+
+// clear gameboard and reset game
+const clearGame = function () {
+  endGame()
+  squares.map((x) => $('#' + x).text(''))
+  startGame()
+}
+
+$('#newGame').on('click', clearGame)
+
+// disable all squares at end of game-board-wrap
+const endGame = function () {
+  squares.map((x) => $('#' + x).off('click'))
+}
 
 // check for win
 function checkWin (tracked) {
@@ -50,11 +73,20 @@ function checkWin (tracked) {
       tracked.includes(win[i][1]) &&
       tracked.includes(win[i][2])
     ) {
-      return (winner = true);
+      return (winner = true)
     }
   }
 }
 
+// display winner in the info element and disable squares
+function displayWinner () {
+  if (winner) {
+    const winningPlayer = xTurn ? 'X' : 'O'
+    $('#info').text(winningPlayer + ' has won!')
+    endGame()
+  }
+}
+
 module.exports = {
-  onSquareClick
+
 }
