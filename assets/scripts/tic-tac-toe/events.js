@@ -14,6 +14,21 @@ const win = [
   ['2', '4', '6']
 ]
 
+// hide gameboard
+const hideBoard = function () {
+  $('.game-container').hide()
+}
+
+// show gameboard
+const showBoard = function () {
+  $('.sign-in-container').hide()
+  $('.game-container').show()
+}
+
+hideBoard()
+
+$('#sign-in').on('click', showBoard)
+
 // check for tie
 const checkTie = function () {
   const used = xTrack.concat(oTrack)

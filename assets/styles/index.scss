@@ -29,7 +29,7 @@ button {
   }
 }
 
-.container {
+.game-container {
   background-color: $lighter-blue;
   border-left: 3px solid black;
   border-right: 3px solid black;
@@ -73,6 +73,19 @@ nav {
   max-width: 800px;
   padding-right: 25px;
   text-align: right;
+}
+
+.sign-btn {
+  border: 0;
+  font-size: 35px;
+}
+
+.sign-in-container {
+  margin-top: 50px;
+}
+
+.sign-in-title {
+  color: $darker-blue;
 }
 
 .sq-zero {
