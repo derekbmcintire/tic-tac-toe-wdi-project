@@ -1,6 +1,7 @@
 const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
+const store = require('../store.js')
 
 let xTurn = true
 let winner = false
@@ -22,8 +23,6 @@ const win = [
 const hideBoard = function () {
   $('.game-container').hide()
 }
-
-$('#info').hide()
 
 // show info
 const showInfo = function () {
@@ -79,6 +78,8 @@ const onSignIn = function (event) {
   const data = getFormFields(event.target)
   console.log(data)
   event.preventDefault()
+  clearGame()
+  $('#info').hide()
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
@@ -113,6 +114,7 @@ const onCreateGame = function (event) {
 const checkTie = function () {
   const used = xTrack.concat(oTrack)
   if (used.length === 9 && !winner) {
+    currentGameState.game.over = true
     $('#info').text('It\'s a tie!')
   }
 }
@@ -131,11 +133,22 @@ const trackMove = function (square) {
   }
 }
 
+const currentGameState = {
+  game: {
+    cell: {
+    },
+    over: false
+  }
+}
+
 // add symbols to board and disable click function
 const onSquareClick = function () {
   const currentLetter = xTurn ? 'X' : 'O'
   $(this).text(currentLetter)
   $(this).off('click')
+  currentGameState.game.cell.index = this.id
+  currentGameState.game.cell.value = currentLetter
+  console.log(currentGameState.game)
   trackMove(this)
   checkWin(xTrack)
   checkWin(oTrack)
@@ -159,18 +172,20 @@ const startGame = function () {
 const clearGame = function () {
   endGame()
   squares.map((x) => $('#' + x).text(''))
-  startGame()
+
 }
 
 // start a new game on button click
 $('#new-game').on('click', function () {
   clearGame()
   showInfo()
+  startGame()
 })
 
 // disable all squares at end of game-board-wrap
 const endGame = function () {
   squares.map((x) => $('#' + x).off('click'))
+
 }
 
 // check for win
@@ -195,13 +210,13 @@ const displayTurn = function () {
 // display winner in the info element and disable squares
 const displayWinner = function () {
   if (winner) {
+    currentGameState.game.over = true
     const winningPlayer = xTurn ? 'Player 2' : 'Player 1'
     $('#info').text(winningPlayer + ' has won!')
     endGame()
   }
 }
 
-startGame()
 hideBoard()
 hideSignIn()
 hideSignUp()
@@ -211,5 +226,6 @@ module.exports = {
   onSignIn,
   onSignOut,
   onChangePassword,
-  onCreateGame
+  onCreateGame,
+  endGame
 }

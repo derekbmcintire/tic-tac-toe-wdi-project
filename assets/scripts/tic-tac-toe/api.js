@@ -48,6 +48,48 @@ const createGame = function () {
   })
 }
 
+const updateGame = function (data) {
+  return $.ajax({
+    url: config.apiOrigin + '/games/' + store.user.id,
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: store.game
+  })
+}
+
+
+
+// {
+//   "game": {
+//     "cell": {
+//       "index": 0,
+//       "value": "x"
+//     },
+//     "over": false
+//   }
+// }
+
+// API="${API_ORIGIN:-http://tic-tac-toe.wdibos.com}"
+// URL_PATH="/games/${ID}"
+//
+// curl "${API}${URL_PATH}" \
+//   --include \
+//   --request PATCH \
+//     --header "Authorization: Token token=${TOKEN}" \
+//   --header "Content-Type: application/json" \
+//   --data '{
+//   "game": {
+//     "cell": {
+//       "index": 0,
+//       "value": "x"
+//     },
+//     "over": false
+//   }
+// }'
+
+
 module.exports = {
   signUp,
   signIn,
