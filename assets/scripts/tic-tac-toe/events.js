@@ -1,3 +1,6 @@
+const getFormFields = require(`../../../lib/get-form-fields`)
+const api = require('./api')
+const ui = require('./ui')
 
 let xTurn = true
 let winner = false
@@ -15,18 +18,83 @@ const win = [
   ['2', '4', '6']
 ]
 
+// hide gameboard
+const hideBoard = function () {
+  $('.game-container').hide()
+}
+
+// show gameboard
+const showBoard = function () {
+  $('.sign-in-container').hide()
+  $('.game-container').show()
+}
+
+// hide sign in form
+const hideSignIn = function () {
+  $('#form-sign-in').hide()
+}
+
+// show sign in form
+const showSignIn = function () {
+  $('#button-wrap').hide()
+  hideSignUp()
+  $('#form-sign-in').show()
+}
+
+// hide sign up form
+const hideSignUp = function () {
+  $('#form-sign-up').hide()
+}
+// show sign up form
+const showSignUp = function () {
+  $('#button-wrap').hide()
+  hideSignIn()
+  $('#form-sign-up').show()
+}
+
+$('#sign-in').on('click', showSignIn)
+$('#sign-up').on('click', showSignUp)
+$('#back-to-sign-up').on('click', showSignUp)
+$('#back-to-sign-in').on('click', showSignIn)
+
+// on sign up
+const onSignUp = function (event) {
+  const data = getFormFields(event.target)
+  console.log(data)
+  event.preventDefault()
+  api.signUp(data)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpFailure)
+}
+
+// on sign in
+const onSignIn = function (event) {
+  const data = getFormFields(event.target)
+  console.log(data)
+  event.preventDefault()
+  api.signIn(data)
+    .then(ui.signInSuccess)
+    .catch(ui.signInFailure)
+}
+
+// on sign out
+const onSignOut = function (event) {
+  event.preventDefault()
+  api.signOut()
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutFailure)
+}
+
+const newTest = function () {
+  console.log('new test')
+}
+
 // check for tie
 const checkTie = function () {
   const used = xTrack.concat(oTrack)
   if (used.length === 9 && !winner) {
     $('#info').text('It\'s a tie!')
   }
-}
-
-// display who's turn it is
-const displayTurn = function () {
-  const currentPlayer = xTurn ? 'X' : 'O'
-  $('#info').text(currentPlayer + '\'s turn!')
 }
 
 // switch turns between X and O
@@ -67,8 +135,6 @@ const startGame = function () {
   displayTurn()
 }
 
-startGame()
-
 // clear gameboard and reset game
 const clearGame = function () {
   endGame()
@@ -98,6 +164,12 @@ function checkWin (tracked) {
   }
 }
 
+// display who's turn it is
+const displayTurn = function () {
+  const currentPlayer = xTurn ? 'X' : 'O'
+  $('#info').text(currentPlayer + '\'s turn!')
+}
+
 // display winner in the info element and disable squares
 const displayWinner = function () {
   if (winner) {
@@ -106,13 +178,14 @@ const displayWinner = function () {
   }
 }
 
+startGame()
+hideBoard()
+hideSignIn()
+hideSignUp()
+
 module.exports = {
-  checkTie,
-  switchTurn,
-  trackMove,
-  onSquareClick,
-  startGame,
-  clearGame,
-  endGame,
-  checkWin
+  onSignUp,
+  onSignIn,
+  onSignOut,
+  newTest
 }

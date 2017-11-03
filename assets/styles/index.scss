@@ -2,7 +2,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 
 $off-white: #ececea;
-$lighter-blue: #74afad ;
+$lighter-blue: #74afad;
 $darker-blue: #558c89;
 $orange: #ffa500;
 $black: #000;
@@ -16,32 +16,42 @@ a {
   font-weight: bold;
 }
 
+.back-to {
+  cursor: pointer;
+}
+
 body {
   background-color: $off-white;
+  font-family: 'Cabin Sketch', cursive;
   text-align: center;
 }
 
 button {
   background-color: $off-white;
   border: 2px solid $darker-blue;
-  color: $darker-blue;
-  &:focus {
+  color:$darker-blue;
+  &:hover {
     outline: 2px solid $orange;
   }
 }
 
-.container {
+.credit {
+  font-size: 12px;
+}
+
+.display-name {
+  display: inline-block;
+  float: left;
+}
+
+.game-container {
   background-color: $lighter-blue;
   border-left: 3px solid $black;
   border-right: 3px solid $black;
   height: 100vh;
   max-width: 800px;
-  min-height: 700px;
+  min-height: 800px;
   padding: 10px;
-}
-
-.credit {
-  font-size: 12px;
 }
 
 .game-board-wrap {
@@ -63,10 +73,42 @@ h3 {
   margin: 5px;
 }
 
+input {
+  margin: 5px;
+}
+
+.log {
+  background: transparent;
+  border: 0;
+  color: $orange;
+  outline: 0;
+}
+
 nav {
+  font-family: helvetica;
   max-width: 800px;
   padding-right: 25px;
   text-align: right;
+}
+
+.sign-btn {
+  border: 0;
+  font-size: 35px;
+}
+
+.sign-in-container {
+  margin-top: 25vh;
+}
+
+.sign-in-title {
+  color: $darker-blue;
+  margin-bottom: 20px;
+}
+
+.sign-in-up {
+  width: 50%;
+  min-width: 200px;
+  max-width: 400px;
 }
 
 .sq-zero {
