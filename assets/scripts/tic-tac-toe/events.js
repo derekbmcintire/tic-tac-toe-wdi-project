@@ -23,11 +23,18 @@ const hideBoard = function () {
   $('.game-container').hide()
 }
 
-// show gameboard
-const showBoard = function () {
-  $('.sign-in-container').hide()
-  $('.game-container').show()
+$('#info').hide()
+
+// show info
+const showInfo = function () {
+  $('#info').show()
 }
+
+// show gameboard
+// const showBoard = function () {
+//   $('.sign-in-container').hide()
+//   $('.game-container').show()
+// }
 
 // hide sign in form
 const hideSignIn = function () {
@@ -94,6 +101,14 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
+// on create game
+const onCreateGame = function (event) {
+  event.preventDefault()
+  api.createGame()
+    .then(ui.createGameSuccess)
+    .catch(ui.createGameFailure)
+}
+
 // check for tie
 const checkTie = function () {
   const used = xTrack.concat(oTrack)
@@ -148,7 +163,10 @@ const clearGame = function () {
 }
 
 // start a new game on button click
-$('#newGame').on('click', clearGame)
+$('#new-game').on('click', function () {
+  clearGame()
+  showInfo()
+})
 
 // disable all squares at end of game-board-wrap
 const endGame = function () {
@@ -193,5 +211,5 @@ module.exports = {
   onSignIn,
   onSignOut,
   onChangePassword,
-  showBoard
+  onCreateGame
 }
