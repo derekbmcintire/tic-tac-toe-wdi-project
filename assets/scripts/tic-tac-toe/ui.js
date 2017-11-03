@@ -33,11 +33,19 @@ const signOutFailure = function () {
 const changePasswordSuccess = function () {
   $('#form-change-password').hide()
   $('#message-change').text('Your password has been changed')
-
 }
 
 const changePasswordFailure = function () {
   $('#message-change').text('Error: password not changed')
+}
+
+const createGameSuccess = function (data) {
+  store.game = data.game
+  console.log(store.game)
+}
+
+const createGameFailure = function () {
+
 }
 
 module.exports = {
@@ -48,5 +56,7 @@ module.exports = {
   signOutSuccess,
   signOutFailure,
   changePasswordSuccess,
-  changePasswordFailure
+  changePasswordFailure,
+  createGameSuccess,
+  createGameFailure
 }

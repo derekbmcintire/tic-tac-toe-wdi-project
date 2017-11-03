@@ -9,6 +9,8 @@ $(() => {
   setAPIOrigin(location, config)
   $('#form-sign-up').on('submit', events.onSignUp)
   $('#form-sign-in').on('submit', events.onSignIn)
+  $('#new-game').on('click', events.onCreateGame)
+  // $('#form-sign-in').on('submit', events.onCreateGame)
   $('#sign-out-button').on('click', events.onSignOut)
   $('#form-change-password').on('submit', events.onChangePassword)
   // $('#change-password').on('submit', onChangePassword)
