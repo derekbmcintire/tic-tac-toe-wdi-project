@@ -110,11 +110,18 @@ const onCreateGame = function (event) {
     .catch(ui.createGameFailure)
 }
 
+// on update game
+const onUpdateGame = function (event) {
+  api.updateGame(store.currentGameState)
+    .then(ui.updateGameSuccess)
+    .catch(ui.updateGameFailure)
+}
+
 // check for tie
 const checkTie = function () {
   const used = xTrack.concat(oTrack)
   if (used.length === 9 && !winner) {
-    currentGameState.game.over = true
+    store.currentGameState.game.over = true
     $('#info').text('It\'s a tie!')
   }
 }
@@ -133,22 +140,14 @@ const trackMove = function (square) {
   }
 }
 
-const currentGameState = {
-  game: {
-    cell: {
-    },
-    over: false
-  }
-}
-
 // add symbols to board and disable click function
 const onSquareClick = function () {
   const currentLetter = xTurn ? 'X' : 'O'
   $(this).text(currentLetter)
   $(this).off('click')
-  currentGameState.game.cell.index = this.id
-  currentGameState.game.cell.value = currentLetter
-  console.log(currentGameState.game)
+  store.currentGameState.game.cell.index = this.id
+  store.currentGameState.game.cell.value = currentLetter
+  console.log(store.currentGameState.game)
   trackMove(this)
   checkWin(xTrack)
   checkWin(oTrack)
@@ -156,6 +155,7 @@ const onSquareClick = function () {
   displayTurn()
   displayWinner()
   checkTie()
+  onUpdateGame()
 }
 
 // add onClick event to all squares
@@ -210,7 +210,7 @@ const displayTurn = function () {
 // display winner in the info element and disable squares
 const displayWinner = function () {
   if (winner) {
-    currentGameState.game.over = true
+    store.currentGameState.game.over = true
     const winningPlayer = xTurn ? 'Player 2' : 'Player 1'
     $('#info').text(winningPlayer + ' has won!')
     endGame()
@@ -227,5 +227,6 @@ module.exports = {
   onSignOut,
   onChangePassword,
   onCreateGame,
-  endGame
+  endGame,
+  onUpdateGame
 }
