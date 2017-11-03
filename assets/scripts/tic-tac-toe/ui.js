@@ -1,14 +1,30 @@
 const signUpSuccess = function (data) {
   $('#message').text('Signed up successfully')
-  console.log('ui is working and sign up successful')
+  $('.sign-in-container').hide()
+  $('.game-container').show()
+  $('#user-display').text(data.email)
+  console.log(data)
 }
 
 const signUpFailure = function () {
   $('#message').text('Error on sign up')
-  console.log('ui is working and sign up failure')
+}
+
+const signInSuccess = function (data) {
+  $('#message').text('Signed in successfuly')
+  $('.sign-in-container').hide()
+  $('.game-container').show()
+  $('#user-display').text(data.user.email)
+  console.log(data)
+}
+
+const signInFailure = function () {
+  $('#message').text('Error on sign in')
 }
 
 module.exports = {
   signUpSuccess,
-  signUpFailure
+  signUpFailure,
+  signInSuccess,
+  signInFailure
 }

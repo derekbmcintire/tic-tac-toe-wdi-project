@@ -18,8 +18,6 @@ const win = [
   ['2', '4', '6']
 ]
 
-$('#sign-up-form').on('submit', onSignUp)
-
 // hide gameboard
 const hideBoard = function () {
   $('.game-container').hide()
@@ -35,23 +33,23 @@ $('#skip').on('click', showBoard)
 
 // hide sign in form
 const hideSignIn = function () {
-  $('#sign-in-form').hide()
+  $('#form-sign-in').hide()
 }
 
 // show sign in form
 const showSignIn = function () {
   $('#button-wrap').hide()
-  $('#sign-in-form').show()
+  $('#form-sign-in').show()
 }
 
 // hide sign up form
 const hideSignUp = function () {
-  $('#sign-up-form').hide()
+  $('#form-sign-up').hide()
 }
 // show sign up form
 const showSignUp = function () {
   $('#button-wrap').hide()
-  $('#sign-up-form').show()
+  $('#form-sign-up').show()
 }
 
 $('#sign-in').on('click', showSignIn)
@@ -65,6 +63,16 @@ const onSignUp = function (event) {
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
+}
+
+// on sign in
+const onSignIn = function (event) {
+  const data = getFormFields(event.target)
+  console.log(data)
+  event.preventDefault()
+  api.signIn(data)
+    .then(ui.signInSuccess)
+    .catch(ui.signInFailure)
 }
 
 const newTest = function () {
@@ -165,7 +173,10 @@ hideBoard()
 hideSignIn()
 hideSignUp()
 
+
 module.exports = {
   onSignUp,
+  onSignIn,
+  showBoard,
   newTest
 }

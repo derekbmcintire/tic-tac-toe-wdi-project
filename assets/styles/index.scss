@@ -29,6 +29,14 @@ button {
   }
 }
 
+.credit {
+  font-size: 12px;
+}
+
+.display-name {
+  display: inline-block;
+}
+
 .game-container {
   background-color: $lighter-blue;
   border-left: 3px solid black;
@@ -37,10 +45,6 @@ button {
   max-width: 800px;
   min-height: 800px;
   padding: 10px;
-}
-
-.credit {
-  font-size: 12px;
 }
 
 .game-board-wrap {

@@ -29,22 +29,17 @@
     <button class="skip" id="skip">skip</button>
   </div>
 
-    <!-- Sign In Form -->
-    <form class="sign-in-up" id="sign-in-form">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" name="credentials[email]" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">Need to <a href="#">sign up</a>?.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+  <!-- Sign In Form -->
+  <form class="sign-in-up" id="form-sign-in">
+    <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
+    <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <h3 id="message"></h3>
+  </form>
 
 
-
+    <!-- Sign Up Form -->
     <form class="sign-in-up" id="form-sign-up">
       <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
       <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
@@ -53,23 +48,6 @@
       <h3 id="message"></h3>
     </form>
 
-    <!-- <form class="sign-in-up" id="sign-up-form">
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="credentials[email]" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">Need to <a href="#">sign in</a>?.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" name="credentials[password]" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password Confirmation</label>
-        <input type="password" name="credentials[password_confirmation]" class="form-control" id="exampleInputPassword1" placeholder="Confirm Password">
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <h3 id="message"></h3>
-    </form> -->
 
 
 
@@ -82,6 +60,8 @@
   <div class="game-container">
     <nav>
       <p>
+        <p class="display-name" id="user-display">
+        </p>
         <button type="button" class="log" data-toggle="modal" data-target="#exampleModal">
           Game History
         </button> |
