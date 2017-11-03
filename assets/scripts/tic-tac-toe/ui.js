@@ -1,4 +1,5 @@
 const store = require('../store.js')
+const event = require('./events.js')
 
 const signUpSuccess = function (data) {
   $('#form-sign-up').hide()
