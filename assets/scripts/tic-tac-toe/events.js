@@ -29,8 +29,6 @@ const showBoard = function () {
   $('.game-container').show()
 }
 
-$('#skip').on('click', showBoard)
-
 // hide sign in form
 const hideSignIn = function () {
   $('#form-sign-in').hide()
