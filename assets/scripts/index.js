@@ -7,10 +7,10 @@ const events = require('./tic-tac-toe/events.js')
 
 $(() => {
   setAPIOrigin(location, config)
-  events.newTest()
   $('#form-sign-up').on('submit', events.onSignUp)
   $('#form-sign-in').on('submit', events.onSignIn)
   $('#sign-out-button').on('click', events.onSignOut)
+  $('#form-change-password').on('submit', events.onChangePassword)
   // $('#change-password').on('submit', onChangePassword)
   // $('#sign-out').on('submit', onSignOut)
 })
