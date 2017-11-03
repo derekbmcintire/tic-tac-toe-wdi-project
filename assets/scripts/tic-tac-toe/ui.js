@@ -46,7 +46,16 @@ const createGameSuccess = function (data) {
 }
 
 const createGameFailure = function () {
+  console.log('failed to create new game')
+}
 
+const updateGameSuccess = function (data) {
+  store.game = data.game
+  console.log(store.game)
+}
+
+const updateGameFailure = function () {
+  console.log('failed to update game')
 }
 
 module.exports = {
@@ -59,5 +68,7 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   createGameSuccess,
-  createGameFailure
+  createGameFailure,
+  updateGameSuccess,
+  updateGameFailure
 }
