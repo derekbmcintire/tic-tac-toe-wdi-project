@@ -1,10 +1,8 @@
 const store = require('../store.js')
 
 const signUpSuccess = function (data) {
-  $('.sign-in-container').hide()
-  $('.game-container').show()
-  $('#user-display').text(data.email)
-  console.log(data)
+  $('#form-sign-up').hide()
+  $('#form-sign-in').show()
 }
 
 const signUpFailure = function () {
@@ -32,10 +30,23 @@ const signOutFailure = function () {
   console.log('sign out failed')
 }
 
+const changePasswordSuccess = function () {
+  $('#form-change-password').hide()
+  $('#message-change').text('Your password has been changed')
+
+}
+
+const changePasswordFailure = function () {
+  $('#message-change').text('Error: password not changed')
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
   signInSuccess,
   signInFailure,
-  signOutSuccess
+  signOutSuccess,
+  signOutFailure,
+  changePasswordSuccess,
+  changePasswordFailure
 }

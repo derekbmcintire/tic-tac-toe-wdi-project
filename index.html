@@ -20,11 +20,12 @@
 <!-- Sign In/Up -->
   <div class="sign-in-container">
     <h1 class='sign-in-title'>Tic Tac Toe</h1>
+    <h4 class="sign-in-test">Sign in to play!</h4>
     <div id="button-wrap">
     <button class="sign-btn" id="sign-in">
       Sign In
     </button>
-    <h3>or</h3>
+    <h3 class="sign-in-text">or</h3>
     <button class="sign-btn" id="sign-up">
       Sign Up
     </button> <br />
@@ -83,11 +84,17 @@
             </button>
           </div>
           <div class="modal-body">
-            ...
+
+            <!-- modal body -->
+            <form class="sign-in-up" id="form-change-password">
+              <input type="password" name="passwords[old]" class="form-control" placeholder="Enter old password">
+              <input type="password" name="passwords[new]" class="form-control" placeholder="Enter new password">
+              <button type="submit" class="btn btn-primary">Submit</button> <br />
+            </form>
+            <h3 id="message-change"></h3>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
         </div>
       </div>

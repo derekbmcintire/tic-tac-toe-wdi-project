@@ -85,8 +85,13 @@ const onSignOut = function (event) {
     .catch(ui.signOutFailure)
 }
 
-const newTest = function () {
-  console.log('new test')
+// on change password
+const onChangePassword = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.changePassword(data)
+    .then(ui.changePasswordSuccess)
+    .catch(ui.changePasswordFailure)
 }
 
 // check for tie
@@ -187,5 +192,6 @@ module.exports = {
   onSignUp,
   onSignIn,
   onSignOut,
-  newTest
+  onChangePassword,
+  showBoard
 }
