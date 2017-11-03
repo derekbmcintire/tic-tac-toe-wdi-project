@@ -10,6 +10,7 @@ $(() => {
   events.newTest()
   $('#form-sign-up').on('submit', events.onSignUp)
   $('#form-sign-in').on('submit', events.onSignIn)
+  $('#sign-out-button').on('click', events.onSignOut)
   // $('#change-password').on('submit', onChangePassword)
   // $('#sign-out').on('submit', onSignOut)
 })

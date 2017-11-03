@@ -37,6 +37,7 @@ const hideSignIn = function () {
 // show sign in form
 const showSignIn = function () {
   $('#button-wrap').hide()
+  hideSignUp()
   $('#form-sign-in').show()
 }
 
@@ -47,11 +48,14 @@ const hideSignUp = function () {
 // show sign up form
 const showSignUp = function () {
   $('#button-wrap').hide()
+  hideSignIn()
   $('#form-sign-up').show()
 }
 
 $('#sign-in').on('click', showSignIn)
 $('#sign-up').on('click', showSignUp)
+$('#back-to-sign-up').on('click', showSignUp)
+$('#back-to-sign-in').on('click', showSignIn)
 
 // on sign up
 const onSignUp = function (event) {
@@ -71,6 +75,14 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
+}
+
+// on sign out
+const onSignOut = function (event) {
+  event.preventDefault()
+  api.signOut()
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutFailure)
 }
 
 const newTest = function () {
@@ -171,10 +183,9 @@ hideBoard()
 hideSignIn()
 hideSignUp()
 
-
 module.exports = {
   onSignUp,
   onSignIn,
-  showBoard,
+  onSignOut,
   newTest
 }

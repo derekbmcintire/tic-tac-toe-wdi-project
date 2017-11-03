@@ -1,5 +1,6 @@
+const store = require('../store.js')
+
 const signUpSuccess = function (data) {
-  $('#message').text('Signed up successfully')
   $('.sign-in-container').hide()
   $('.game-container').show()
   $('#user-display').text(data.email)
@@ -7,24 +8,34 @@ const signUpSuccess = function (data) {
 }
 
 const signUpFailure = function () {
-  $('#message').text('Error on sign up')
+  $('#message-up').text('Something went wrong, please try again')
 }
 
 const signInSuccess = function (data) {
-  $('#message').text('Signed in successfuly')
   $('.sign-in-container').hide()
   $('.game-container').show()
   $('#user-display').text(data.user.email)
-  console.log(data)
+  store.user = data.user
 }
 
 const signInFailure = function () {
-  $('#message').text('Error on sign in')
+  $('#message-in').text('Please try again')
+}
+
+const signOutSuccess = function () {
+  $('.game-container').hide()
+  $('.sign-in-container').show()
+  $('#message-in').text('You have been signed out')
+}
+
+const signOutFailure = function () {
+  console.log('sign out failed')
 }
 
 module.exports = {
   signUpSuccess,
   signUpFailure,
   signInSuccess,
-  signInFailure
+  signInFailure,
+  signOutSuccess
 }

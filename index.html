@@ -35,8 +35,9 @@
   <form class="sign-in-up" id="form-sign-in">
     <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
     <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <h3 id="message"></h3>
+    <button type="submit" class="btn btn-primary">Submit</button> <br />
+    <small>Looking for <a class="back-to" id="back-to-sign-up">Sign Up</a>?</small>
+    <h3 id="message-in"></h3>
   </form>
 
 
@@ -45,14 +46,10 @@
       <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
       <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
       <input type="password" name="credentials[password_confirmation]" class="form-control" placeholder="Re-enter password">
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <h3 id="message"></h3>
+      <button type="submit" class="btn btn-primary">Submit</button> <br />
+      <small>Looking for <a class= "back-to" id="back-to-sign-in">Sign In</a>?</small>
+      <h3 id="message-up"></h3>
     </form>
-
-
-
-
-
   </div>
 
 
@@ -60,29 +57,27 @@
 
   <div class="game-container">
     <nav>
-      <p>
         <p class="display-name" id="user-display">
         </p>
         <button type="button" class="log" data-toggle="modal" data-target="#exampleModal">
           Game History
         </button> |
-        <button type="button" class="log" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" class="log" data-toggle="modal" data-target="#change-password-modal">
           Change Password
         </button> |
-        <button type="button" class="log" data-toggle="modal" data-target="#exampleModal">
-          Log Out
+        <button type="button" class="log" id="sign-out-button">
+          Sign Out
         </button>
-      </p>
     </nav>
 
 
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

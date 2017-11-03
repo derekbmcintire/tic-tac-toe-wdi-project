@@ -15,6 +15,10 @@ a {
   font-weight: bold;
 }
 
+.back-to {
+  cursor: pointer;
+}
+
 body {
   background-color: $off-white;
   font-family: 'Cabin Sketch', cursive;
@@ -23,9 +27,9 @@ body {
 
 button {
   background-color: $off-white;
-  color:$darker-blue;
   border: 2px solid $darker-blue;
-    &:hover {
+  color:$darker-blue;
+  &:hover {
     outline: 2px solid $orange;
   }
 }
@@ -36,6 +40,7 @@ button {
 
 .display-name {
   display: inline-block;
+  float: left;
 }
 
 .game-container {
@@ -67,6 +72,10 @@ h3 {
   margin: 5px;
 }
 
+input {
+  margin: 5px;
+}
+
 .log {
   background: transparent;
   border: 0;
@@ -75,6 +84,7 @@ h3 {
 }
 
 nav {
+  font-family: helvetica;
   max-width: 800px;
   padding-right: 25px;
   text-align: right;
