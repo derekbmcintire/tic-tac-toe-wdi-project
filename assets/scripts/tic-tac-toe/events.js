@@ -59,12 +59,16 @@ $('#sign-up').on('click', showSignUp)
 
 // on sign up
 const onSignUp = function (event) {
-  const data = getFormFields(this)
+  const data = getFormFields(event.target)
   console.log(data)
   event.preventDefault()
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
+}
+
+const newTest = function () {
+  console.log('new test')
 }
 
 // check for tie
@@ -162,5 +166,6 @@ hideSignIn()
 hideSignUp()
 
 module.exports = {
-  onSignUp
+  onSignUp,
+  newTest
 }

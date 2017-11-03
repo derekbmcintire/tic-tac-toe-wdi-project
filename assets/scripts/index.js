@@ -2,11 +2,13 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
+const api = require('./tic-tac-toe/api')
 const events = require('./tic-tac-toe/events.js')
 
 $(() => {
   setAPIOrigin(location, config)
-  // $('#sign-up-form').on('submit', events.onSignUp)
+  events.newTest()
+   $('#form-sign-up').on('submit', events.onSignUp)
   // $('#sign-in').on('submit', onSignIn)
   // $('#change-password').on('submit', onChangePassword)
   // $('#sign-out').on('submit', onSignOut)
