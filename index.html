@@ -15,30 +15,28 @@
 
 <body>
 
-<!-- Sign In/Up -->
+  <!-- Sign In/Up -->
   <div class="sign-in-container">
     <h1 class='sign-in-title'>Tic Tac Toe</h1>
     <h4 class="sign-in-test">Sign in to play!</h4>
     <div id="button-wrap">
-    <button class="sign-btn" id="sign-in">
+      <button class="sign-btn" id="sign-in">
       Sign In
     </button>
-    <h3 class="sign-in-text">or</h3>
-    <button class="sign-btn" id="sign-up">
+      <h3 class="sign-in-text">or</h3>
+      <button class="sign-btn" id="sign-up">
       Sign Up
     </button> <br />
-  </div>
+    </div>
 
-
-  <!-- Sign In Form -->
-  <form class="sign-in-up" id="form-sign-in">
-    <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
-    <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
-    <button type="submit" class="btn btn-primary">Submit</button> <br />
-    <small>Looking for <a class="back-to" id="back-to-sign-up">Sign Up</a>?</small>
-    <h3 id="message-in"></h3>
-  </form>
-
+    <!-- Sign In Form -->
+    <form class="sign-in-up" id="form-sign-in">
+      <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
+      <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
+      <button type="submit" class="btn btn-primary">Submit</button> <br />
+      <small>Looking for <a class="back-to" id="back-to-sign-up">Sign Up</a>?</small>
+      <h3 id="message-in"></h3>
+    </form>
 
     <!-- Sign Up Form -->
     <form class="sign-in-up" id="form-sign-up">
@@ -51,25 +49,20 @@
     </form>
   </div>
 
-
-
-
   <div class="game-container">
     <nav>
-        <p class="display-name" id="user-display">
-        </p>
-        <button type="button" class="log" data-toggle="modal" data-target="#exampleModal">
+      <p class="display-name" id="user-display">
+      </p>
+      <button type="button" class="log" data-toggle="modal" data-target="#exampleModal">
           Game History
         </button> |
-        <button type="button" class="log" data-toggle="modal" data-target="#change-password-modal">
+      <button type="button" class="log" data-toggle="modal" data-target="#change-password-modal">
           Change Password
         </button> |
-        <button type="button" class="log" id="sign-out-button">
+      <button type="button" class="log" id="sign-out-button">
           Sign Out
         </button>
     </nav>
-
-
 
     <!-- Modal -->
     <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,28 +91,36 @@
       </div>
     </div>
 
-    <header class="top-wrap">
-      <div class="over-the-top">
-        <h1>Tic Tac Toe</h1>
-      </div>
+    <!-- end modal -->
+<br />
+
+<div class="top-wrap">
       <div class="top top-left">
         <h3>Player 1</h3>
         <div class="symbol comp-symbol">
           X
         </div>
+        <h4 class="score">Wins: <span id="1-wins"></span></h4>
       </div>
+
+      <div class="top-title">
+        <h1>Tic Tac Toe</h1>
+      </div>
+
       <div class="top top-right">
         <h3>Player 2</h3>
         <div class="symbol user-symbol">
           O
         </div>
+        <h4 class="score">Wins: <span id="2-wins"></span></h4>
       </div>
-      <div class="message">
-        <h2 id ='info'>X's turn!</h2>
-      </div>
-      <button id='new-game'>New Game</button>
-    </header>
+    </div>
+<br />
 
+    <div class="message">
+      <h2 id='info'>X's turn!</h2>
+    </div>
+    <button id='new-game'>New Game</button> <br />
 
     <main class="game-board-wrap">
       <div class="top-row">

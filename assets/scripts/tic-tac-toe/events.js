@@ -7,6 +7,8 @@ let xTurn = true
 let winner = false
 let xTrack = []
 let oTrack = []
+let wins1 = 0
+let wins2 = 0
 const squares = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
 const win = [
   ['0', '1', '2'],
@@ -18,6 +20,9 @@ const win = [
   ['0', '4', '8'],
   ['2', '4', '6']
 ]
+
+$('#1-wins').text(wins1)
+$('#2-wins').text(wins2)
 
 // hide gameboard
 const hideBoard = function () {
@@ -212,8 +217,13 @@ const displayTurn = function () {
 const displayWinner = function () {
   if (winner) {
     store.currentGameState.game.over = true
-    const winningPlayer = xTurn ? 'Player 2' : 'Player 1'
-    $('#info').text(winningPlayer + ' has won!')
+    const winningPlayer = xTurn ? '2' : '1'
+    if (winningPlayer === '1') {
+
+    }
+    $('#info').text('Player ' + winningPlayer + ' has won!')
+
+
   }
 }
 
