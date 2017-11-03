@@ -1,4 +1,3 @@
-require('./ui.js')
 
 let xTurn = true
 let winner = false
@@ -106,10 +105,6 @@ const displayWinner = function () {
     $('#info').text(winningPlayer + ' has won!')
   }
 }
-
-/* Sign Up/In/Out API ******************************************/
-
-
 
 module.exports = {
   checkTie,
