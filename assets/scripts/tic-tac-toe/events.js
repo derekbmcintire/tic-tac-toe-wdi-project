@@ -219,11 +219,13 @@ const displayWinner = function () {
     store.currentGameState.game.over = true
     const winningPlayer = xTurn ? '2' : '1'
     if (winningPlayer === '1') {
-
+      $('#1-wins').text(wins1 + 1)
+      wins1++
+    } else {
+      $('#2-wins').text(wins2 + 1)
+      wins2++
     }
     $('#info').text('Player ' + winningPlayer + ' has won!')
-
-
   }
 }
 
