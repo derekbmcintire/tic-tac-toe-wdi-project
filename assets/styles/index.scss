@@ -96,6 +96,10 @@ nav {
   text-align: right;
 }
 
+.new-game-btn {
+  margin-top: 20px;
+}
+
 .sign-btn {
   border: 0;
   font-size: 35px;
@@ -189,9 +193,18 @@ nav {
   width: 100px;
 }
 
-.top-title {
+.side-title {
   display: inline-block;
   height: 100px;
+  margin-left: -676px;
+  margin-top: 200px;
+  position: absolute;
+  transform: rotate(-90deg);
+}
+
+.side-text {
+  color: black;
+  font-size: 100px;
 }
 
 .top-wrap {

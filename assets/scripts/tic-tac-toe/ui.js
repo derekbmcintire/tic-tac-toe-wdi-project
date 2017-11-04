@@ -23,6 +23,7 @@ const signUpFailure = function () {
 const signInSuccess = function (data) {
   $('.sign-in-container').hide()
   $('.game-container').show()
+  $('#side-title-div').show()
   $('#user-display').text(data.user.email)
   store.user = data.user
 }

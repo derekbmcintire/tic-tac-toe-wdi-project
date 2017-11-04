@@ -27,6 +27,7 @@ $('#2-wins').text(wins2)
 
 // hide game container and sign in/sign up forms
 $('.game-container').hide()
+$('#side-title-div').hide()
 $('#form-sign-in').hide()
 $('#form-sign-up').hide()
 
