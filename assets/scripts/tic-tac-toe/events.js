@@ -29,12 +29,6 @@ const showInfo = function () {
   $('#info').show()
 }
 
-// show gameboard
-// const showBoard = function () {
-//   $('.sign-in-container').hide()
-//   $('.game-container').show()
-// }
-
 // hide sign in form
 const hideSignIn = function () {
   $('#form-sign-in').hide()
@@ -115,6 +109,14 @@ const onUpdateGame = function (event) {
   api.updateGame(store.currentGameState)
     .then(ui.updateGameSuccess)
     .catch(ui.updateGameFailure)
+}
+
+// on get games
+const onGetGames = function (event) {
+  event.preventDefault()
+  api.getGames()
+    .then(ui.getGamesSuccess)
+    .catch(ui.getGamesFailure)
 }
 
 // check for tie
@@ -228,5 +230,6 @@ module.exports = {
   onChangePassword,
   onCreateGame,
   endGame,
-  onUpdateGame
+  onUpdateGame,
+  onGetGames
 }

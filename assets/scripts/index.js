@@ -10,11 +10,10 @@ $(() => {
   $('#form-sign-up').on('submit', events.onSignUp)
   $('#form-sign-in').on('submit', events.onSignIn)
   $('#new-game').on('click', events.onCreateGame)
-  // $('#form-sign-in').on('submit', events.onCreateGame)
+
   $('#sign-out-button').on('click', events.onSignOut)
   $('#form-change-password').on('submit', events.onChangePassword)
-  // $('#change-password').on('submit', onChangePassword)
-  // $('#sign-out').on('submit', onSignOut)
+  $('#game-history').on('click', events.onGetGames)
 })
 
 // use require with a reference to bundle the file and use it in this file

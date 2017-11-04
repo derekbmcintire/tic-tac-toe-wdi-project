@@ -58,6 +58,16 @@ const updateGameFailure = function () {
   console.log('failed to update game')
 }
 
+const getGamesSuccess = function (data) {
+  $('#player-history').text(store.user.email)
+  $('#games-played').text(' ' + data.games.length)
+  console.log(store.allGames)
+}
+
+const getGamesFailure = function () {
+
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -70,5 +80,7 @@ module.exports = {
   createGameSuccess,
   createGameFailure,
   updateGameSuccess,
-  updateGameFailure
+  updateGameFailure,
+  getGamesSuccess,
+  getGamesFailure
 }
