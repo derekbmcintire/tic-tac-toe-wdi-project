@@ -34,6 +34,7 @@ const signInFailure = function () {
 
 const signOutSuccess = function () {
   $('.game-container').hide()
+  $('#side-title-div').hide()
   $('.sign-in-container').show()
   $('#message-in').text('You have been signed out')
 }
