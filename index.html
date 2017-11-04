@@ -122,28 +122,35 @@
     </div>
 
     <!--End Modals-->
+    <br />
 
-    <header class="top-wrap">
-      <div class="over-the-top">
-        <h1>Tic Tac Toe</h1>
-      </div>
-      <div class="top top-left">
-        <h3>Player 1</h3>
-        <div class="symbol comp-symbol">
-          X
+    <div class="top-wrap">
+          <div class="top top-left">
+            <h3>Player 1</h3>
+            <div class="symbol comp-symbol">
+              X
+            </div>
+            <h4 class="score">Wins: <span id="1-wins">0</span></h4>
+          </div>
+
+          <div class="top-title">
+            <h1>Tic Tac Toe</h1>
+          </div>
+
+          <div class="top top-right">
+            <h3>Player 2</h3>
+            <div class="symbol user-symbol">
+              O
+            </div>
+            <h4 class="score">Wins: <span id="2-wins">0</span></h4>
+          </div>
         </div>
-      </div>
-      <div class="top top-right">
-        <h3>Player 2</h3>
-        <div class="symbol user-symbol">
-          O
+    <br />
+
+        <div class="message">
+          <h2 id='info'>X's turn!</h2>
         </div>
-      </div>
-      <div class="message">
-        <h2 id ='info'>X's turn!</h2>
-      </div>
-      <button id='new-game'>New Game</button>
-    </header>
+      <button id='new-game'>New Game</button> <br />
 
 
     <main class="game-board-wrap">
