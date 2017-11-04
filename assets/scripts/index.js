@@ -2,17 +2,17 @@
 
 const setAPIOrigin = require('../../lib/set-api-origin')
 const config = require('./config')
-const api = require('./tic-tac-toe/api')
 const events = require('./tic-tac-toe/events.js')
-const ui = require('./tic-tac-toe/ui.js')
-
 
 $(() => {
   setAPIOrigin(location, config)
+  $('#sign-in').on('click', events.showSignIn)
+  $('#sign-up').on('click', events.showSignUp)
+  $('#back-to-sign-up').on('click', events.showSignUp)
+  $('#back-to-sign-in').on('click', events.showSignIn)
   $('#form-sign-up').on('submit', events.onSignUp)
   $('#form-sign-in').on('submit', events.onSignIn)
   $('#new-game').on('click', events.onCreateGame)
-
   $('#sign-out-button').on('click', events.onSignOut)
   $('#form-change-password').on('submit', events.onChangePassword)
   $('#game-history').on('click', events.onGetGames)

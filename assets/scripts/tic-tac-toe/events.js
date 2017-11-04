@@ -21,51 +21,34 @@ const win = [
   ['2', '4', '6']
 ]
 
+// display number of wins for each player
 $('#1-wins').text(wins1)
 $('#2-wins').text(wins2)
 
-// hide gameboard
-const hideBoard = function() {
-  $('.game-container').hide()
-}
+// hide game container and sign in/sign up forms
+$('.game-container').hide()
+$('#form-sign-in').hide()
+$('#form-sign-up').hide()
 
-// show info
-const showInfo = function() {
-  $('#info').show()
-}
-
-// hide sign in form
-const hideSignIn = function() {
-  $('#form-sign-in').hide()
-}
-
+// functions
 // show sign in form
-const showSignIn = function() {
+const showSignIn = function () {
   $('#button-wrap').hide()
-  hideSignUp()
+  $('#form-sign-up').hide()
   $('#form-sign-in').show()
 }
 
-// hide sign up form
-const hideSignUp = function() {
-  $('#form-sign-up').hide()
-}
 // show sign up form
-const showSignUp = function() {
+const showSignUp = function () {
   $('#button-wrap').hide()
-  hideSignIn()
+  $('#form-sign-in').hide()
   $('#form-sign-up').show()
 }
 
-$('#sign-in').on('click', showSignIn)
-$('#sign-up').on('click', showSignUp)
-$('#back-to-sign-up').on('click', showSignUp)
-$('#back-to-sign-in').on('click', showSignIn)
-
+// API auth click handlers
 // on sign up
-const onSignUp = function(event) {
+const onSignUp = function (event) {
   const data = getFormFields(event.target)
-  console.log(data)
   event.preventDefault()
   api.signUp(data)
     .then(ui.signUpSuccess)
@@ -73,9 +56,8 @@ const onSignUp = function(event) {
 }
 
 // on sign in
-const onSignIn = function(event) {
+const onSignIn = function (event) {
   const data = getFormFields(event.target)
-  console.log(data)
   event.preventDefault()
   clearGame()
   $('#info').hide()
@@ -85,7 +67,7 @@ const onSignIn = function(event) {
 }
 
 // on sign out
-const onSignOut = function(event) {
+const onSignOut = function (event) {
   event.preventDefault()
   api.signOut()
     .then(ui.signOutSuccess)
@@ -93,7 +75,7 @@ const onSignOut = function(event) {
 }
 
 // on change password
-const onChangePassword = function(event) {
+const onChangePassword = function (event) {
   event.preventDefault()
   const data = getFormFields(event.target)
   api.changePassword(data)
@@ -101,8 +83,9 @@ const onChangePassword = function(event) {
     .catch(ui.changePasswordFailure)
 }
 
+// API game event handlers
 // on create game
-const onCreateGame = function(event) {
+const onCreateGame = function (event) {
   event.preventDefault()
   api.createGame()
     .then(ui.createGameSuccess)
@@ -110,22 +93,23 @@ const onCreateGame = function(event) {
 }
 
 // on update game
-const onUpdateGame = function(event) {
+const onUpdateGame = function (event) {
   api.updateGame(store.currentGameState)
     .then(ui.updateGameSuccess)
     .catch(ui.updateGameFailure)
 }
 
 // on get games
-const onGetGames = function(event) {
+const onGetGames = function (event) {
   event.preventDefault()
   api.getGames()
     .then(ui.getGamesSuccess)
     .catch(ui.getGamesFailure)
 }
 
+// game logic
 // check for tie
-const checkTie = function() {
+const checkTie = function () {
   const used = xTrack.concat(oTrack)
   if (used.length === 9 && !winner) {
     store.currentGameState.game.over = true
@@ -139,7 +123,7 @@ const switchTurn = () => {
 }
 
 // track X and O moves in separate arrays
-const trackMove = function(square) {
+const trackMove = function (square) {
   if (xTurn) {
     xTrack.push(square.id)
   } else {
@@ -148,13 +132,12 @@ const trackMove = function(square) {
 }
 
 // add symbols to board and disable click function
-const onSquareClick = function() {
+const onSquareClick = function () {
   const currentLetter = xTurn ? 'X' : 'O'
   $(this).text(currentLetter)
   $(this).off('click')
   store.currentGameState.game.cell.index = this.id
   store.currentGameState.game.cell.value = currentLetter
-  console.log(store.currentGameState.game)
   trackMove(this)
   checkWin(xTrack)
   checkWin(oTrack)
@@ -165,8 +148,8 @@ const onSquareClick = function() {
   onUpdateGame()
 }
 
-// add onClick event to all squares
-const startGame = function() {
+// add click event to all squares
+const startGame = function () {
   xTurn = true
   winner = false
   xTrack = []
@@ -176,25 +159,25 @@ const startGame = function() {
 }
 
 // clear gameboard and reset game
-const clearGame = function() {
+const clearGame = function () {
   endGame()
   squares.map((x) => $('#' + x).text(''))
 }
 
 // start a new game on button click
-$('#new-game').on('click', function() {
+$('#new-game').on('click', function () {
   clearGame()
-  showInfo()
+  $('#info').show()
   startGame()
 })
 
 // disable all squares at end of game-board-wrap
-const endGame = function() {
+const endGame = function () {
   squares.map((x) => $('#' + x).off('click'))
 }
 
 // check for win
-function checkWin(tracked) {
+function checkWin (tracked) {
   for (let i = 0; i < win.length; i++) {
     if (
       tracked.includes(win[i][0]) &&
@@ -208,13 +191,13 @@ function checkWin(tracked) {
 }
 
 // display who's turn it is
-const displayTurn = function() {
+const displayTurn = function () {
   const currentPlayer = xTurn ? 'X' : 'O'
   $('#info').text(currentPlayer + '\'s turn!')
 }
 
 // display winner in the info element and disable squares
-const displayWinner = function() {
+const displayWinner = function () {
   if (winner) {
     store.currentGameState.game.over = true
     const winningPlayer = xTurn ? '2' : '1'
@@ -229,14 +212,12 @@ const displayWinner = function() {
   }
 }
 
-hideBoard()
-hideSignIn()
-hideSignUp()
-
 module.exports = {
   onSignUp,
   onSignIn,
   onSignOut,
+  showSignIn,
+  showSignUp,
   onChangePassword,
   onCreateGame,
   endGame,

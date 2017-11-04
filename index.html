@@ -15,7 +15,7 @@
 
 <body>
 
-  <!-- Sign In/Up -->
+  <!-- Sign In/Up Container-->
   <div class="sign-in-container">
     <h1 class='sign-in-title'>Tic Tac Toe</h1>
     <h4 class="sign-in-test">Sign in to play!</h4>
@@ -49,6 +49,8 @@
     </form>
   </div>
 
+  <!-- Game Container -->
+  <!-- Nav Bar -->
   <div class="game-container">
     <nav>
         <p class="display-name" id="user-display">
@@ -64,8 +66,6 @@
         </button>
     </nav>
 
-
-
     <!-- Sign Out Modal -->
     <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -77,14 +77,14 @@
             </button>
           </div>
           <div class="modal-body">
-
-            <!-- modal body -->
+            <!-- Modal Body -->
             <form class="sign-in-up" id="form-change-password">
               <input type="password" name="passwords[old]" class="form-control" placeholder="Enter old password">
               <input type="password" name="passwords[new]" class="form-control" placeholder="Enter new password">
               <button type="submit" class="btn btn-primary">Submit</button> <br />
             </form>
             <h3 id="message-change"></h3>
+            <!-- End Modal Body -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -93,8 +93,7 @@
       </div>
     </div>
 
-    <!--Game History Modal-->
-    <!-- Modal -->
+    <!-- Game History Modal -->
     <div class="modal fade" id="history-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -105,9 +104,10 @@
             </button>
           </div>
           <div class="modal-body">
-            <!-- modal body -->
+            <!-- Modal Body -->
             <h2 id="player-history"></h2>
             <h3>Games Played:<span id="games-played"></span></h3>
+            <!-- End Modal Body -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -115,12 +115,14 @@
         </div>
       </div>
     </div>
-
     <!--End Modals-->
+
     <br />
 
-    <div class="top-wrap">
+    <!-- Info and Score Section -->
+    <section class="top-wrap">
           <div class="top top-left">
+
             <h3>Player 1</h3>
             <div class="symbol comp-symbol">
               X
@@ -139,14 +141,19 @@
             </div>
             <h4 class="score">Wins: <span id="2-wins"></span></h4>
           </div>
-        </div>
+
+        </section>
+
     <br />
 
         <div class="message">
           <h2 id='info'>X's turn!</h2>
         </div>
-        <button id='new-game'>New Game</button> <br />
+        <button id='new-game'>New Game</button>
 
+    <br />
+
+    <!-- Game Board-->
     <main class="game-board-wrap">
       <div class="top-row">
         <div class="square sq-zero" id="0"></div>
@@ -166,10 +173,11 @@
     </main>
 
     <footer>
-      <h2 class="credit">Coded by Derek McIntires</h2>
+      <h2 class="credit">Coded by Derek McIntire</h2>
     </footer>
-
+    <!-- End Game Container-->
   </div>
+
 </body>
 
 </html>
