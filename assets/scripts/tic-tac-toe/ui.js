@@ -68,6 +68,7 @@ const updateGameFailure = function () {
   console.log('failed to update game')
 }
 
+// check win history for current user
 const checkWinHistory = function (allGames) {
   let allWins = 0
   allGames.games.map((obj) => {
@@ -81,14 +82,15 @@ const checkWinHistory = function (allGames) {
         return oFinal.push(i)
       }
     })
-    if (checkWinAgain(xFinal)) {
+    if (checkPastWin(xFinal)) {
       allWins++
     }
   })
   return allWins
 }
 
-const checkWinAgain = function (tracked) {
+// check a users past game for win
+const checkPastWin = function (tracked) {
   const trackedToStrings = tracked.map((x) => {
     return x.toString()
   })

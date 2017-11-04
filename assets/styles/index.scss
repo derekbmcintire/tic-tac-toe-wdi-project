@@ -30,7 +30,7 @@ body {
 button {
   background-color: $off-white;
   border: 2px solid $darker-blue;
-  color:$darker-blue;
+  color: $darker-blue;
   &:hover {
     outline: 2px solid $orange;
   }
@@ -99,15 +99,15 @@ nav {
 .sign-btn {
   border: 0;
   font-size: 35px;
+  padding: 0;
+  &:hover {
+    outline: 0;
+    font-size: 45px;
+  }
 }
 
 .sign-in-container {
   margin-top: 25vh;
-}
-
-.sign-in-text {
-  margin: 0;
-  margin-bottom: -5px;
 }
 
 .sign-in-title {
@@ -182,19 +182,40 @@ nav {
   line-height: 60px;
   width: 60px;
 }
+
 .top {
-width: 100px;
-height: 100px;
-display: inline-block;
+  display: inline-block;
+  height: 100px;
+  width: 100px;
 }
 
 .top-title {
-height: 100px;
-display: inline-block;
+  display: inline-block;
+  height: 100px;
 }
 
 .top-wrap {
   margin: 0 auto;
   margin-bottom: -30px;
   text-align: center;
+}
+
+@media (max-width: 600px) {
+  .top-title {
+    float: left;
+    width: 100%;
+  }
+
+  .player-1-symbol {
+    float: clear;
+  }
+}
+
+@media (max-width: 1200px) {
+  .square {
+    font-size: 60px;
+    height: 80px;
+    line-height: 80px;
+    width: 80px;
+  }
 }
