@@ -59,34 +59,15 @@ const updateGame = function (data) {
   })
 }
 
-// {
-//   "game": {
-//     "cell": {
-//       "index": 0,
-//       "value": "x"
-//     },
-//     "over": false
-//   }
-// }
-
-// API="${API_ORIGIN:-http://tic-tac-toe.wdibos.com}"
-// URL_PATH="/games/${ID}"
-//
-// curl "${API}${URL_PATH}" \
-//   --include \
-//   --request PATCH \
-//     --header "Authorization: Token token=${TOKEN}" \
-//   --header "Content-Type: application/json" \
-//   --data '{
-//   "game": {
-//     "cell": {
-//       "index": 0,
-//       "value": "x"
-//     },
-//     "over": false
-//   }
-// }'
-
+const getGames = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 
 module.exports = {
   signUp,
@@ -94,5 +75,6 @@ module.exports = {
   signOut,
   changePassword,
   createGame,
-  updateGame
+  updateGame,
+  getGames
 }
