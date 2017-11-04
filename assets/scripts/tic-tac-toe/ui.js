@@ -1,5 +1,15 @@
 const store = require('../store.js')
-const event = require('./events.js')
+
+const wins = [
+  ['0', '1', '2'],
+  ['3', '4', '5'],
+  ['6', '7', '8'],
+  ['0', '3', '6'],
+  ['1', '4', '7'],
+  ['2', '5', '8'],
+  ['0', '4', '8'],
+  ['2', '4', '6']
+]
 
 const signUpSuccess = function (data) {
   $('#form-sign-up').hide()
@@ -58,14 +68,50 @@ const updateGameFailure = function () {
   console.log('failed to update game')
 }
 
+const checkWinHistory = function (allGames) {
+  let allWins = 0
+  allGames.games.map((obj) => {
+    const gameBoard = obj.cells
+    const xFinal = []
+    const oFinal = []
+    gameBoard.map((cell, i) => {
+      if (cell === 'X') {
+        return xFinal.push(i)
+      } else {
+        return oFinal.push(i)
+      }
+    })
+    if (checkWinAgain(xFinal)) {
+      allWins++
+    }
+  })
+  return allWins
+}
+
+const checkWinAgain = function (tracked) {
+  const trackedToStrings = tracked.map((x) => {
+    return x.toString()
+  })
+  for (let i = 0; i < wins.length; i++) {
+    if (
+      trackedToStrings.includes(wins[i][0]) &&
+      trackedToStrings.includes(wins[i][1]) &&
+      trackedToStrings.includes(wins[i][2])
+    ) {
+      return true
+    }
+  }
+}
+
 const getGamesSuccess = function (data) {
   $('#player-history').text(store.user.email)
   $('#games-played').text(' ' + data.games.length)
-  console.log(store.allGames)
+  $('#games-won').text(' ' + checkWinHistory(data) + ' games')
 }
 
 const getGamesFailure = function () {
-
+  $('#player-history').text(store.user.email)
+  $('#games-played').text('Error finding game history')
 }
 
 module.exports = {
