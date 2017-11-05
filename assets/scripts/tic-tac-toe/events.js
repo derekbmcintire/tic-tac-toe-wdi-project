@@ -101,6 +101,12 @@ let xTurn = true
 let winner = false
 let xTrack = []
 let oTrack = []
+let usedSquares = []
+let playComp = false
+let player
+let comp
+let moved
+let gameOn = false
 const squares = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
 const win = [
   ['0', '1', '2'],
@@ -115,10 +121,11 @@ const win = [
 
 // check for tie
 const checkTie = function () {
-  const used = xTrack.concat(oTrack)
-  if (used.length === 9 && !winner) {
+  // const used = xTrack.concat(oTrack)
+  if (usedSquares.length === 9 && !winner) {
     store.currentGameState.game.over = true
     $('#info').text('It\'s a tie!')
+    endGame()
   }
 }
 
@@ -138,27 +145,46 @@ const trackMove = function (square) {
 
 // add symbols to board and disable click function
 const onSquareClick = function () {
-  const currentLetter = xTurn ? 'X' : 'O'
-  $(this).text(currentLetter)
+  if (playComp) {
+    if (player === 'X') {
+      $(this).text('X')
+      store.currentGameState.game.cell.value = 'X'
+    } else {
+      $(this).text('O')
+      store.currentGameState.game.cell.value = 'O'
+    }
+  } else {
+    const currentLetter = xTurn ? 'X' : 'O'
+    $(this).text(currentLetter)
+    store.currentGameState.game.cell.value = currentLetter
+  }
   $(this).off('click')
   store.currentGameState.game.cell.index = this.id
-  store.currentGameState.game.cell.value = currentLetter
   trackMove(this)
   checkWin(xTrack)
   checkWin(oTrack)
+  usedSquares = xTrack.concat(oTrack)
   switchTurn()
   displayTurn()
   displayWinner()
   checkTie()
   onUpdateGame()
+  moved = false
+  if (!winner && playComp && gameOn) {
+    setTimeout(function () {
+      compDecide()
+    }, 1000)
+  }
 }
 
 // add click event to all squares
 const startGame = function () {
+  gameOn = true
   xTurn = true
   winner = false
   xTrack = []
   oTrack = []
+  usedSquares = []
   squares.map((x) => $('#' + x).on('click', onSquareClick))
   displayTurn()
 }
@@ -172,6 +198,7 @@ const clearGame = function () {
 // disable all squares at end of game-board-wrap
 const endGame = function () {
   squares.map((x) => $('#' + x).off('click'))
+  gameOn = false
 }
 
 // start a new game on button click
@@ -179,6 +206,13 @@ $('#new-game').on('click', function () {
   clearGame()
   $('#info').show()
   startGame()
+  if (playComp) {
+    if (player !== 'X') {
+      setTimeout(function () {
+        compDecide()
+      }, 1000)
+    }
+  }
 })
 
 // check for win
@@ -217,6 +251,179 @@ const displayWinner = function () {
   }
 }
 
+
+/************ Play Against Computer **************/
+
+// on comp play click
+const onCompPlay = function () {
+  if (!playComp) {
+    $('#on-off').css({'float': 'right', 'background-color': 'green'})
+    $('#current-mode').text('Player vs Computer')
+    $('#p2').text('Computer')
+    whoGoesFirst()
+    playComp = true
+  } else if (playComp) {
+    $('#on-off').css({'float': 'left', 'background-color': 'red'})
+    $('#current-mode').text('Player vs Player')
+    $('#player-2-symbol').html('O')
+    $('#player-1-symbol').html('X')
+    playComp = false
+  }
+}
+
+const whoGoesFirst = function () {
+  const x = Math.floor(1 + Math.random() * 2)
+  if (x === 2) {
+    $('#player-2-symbol').html('X')
+    $('#player-1-symbol').html('O')
+    player = 'O'
+    comp = 'X'
+  } else {
+    player = 'X'
+    comp = 'O'
+  }
+}
+
+// tells computer to choose a random square
+function randomChoice () {
+  const randomNum = Math.floor(Math.random() * 9).toString()
+  if (!usedSquares.includes(randomNum)) {
+    compMove(randomNum)
+  } else {
+    randomChoice()
+  }
+}
+
+// computer chooses a square
+function compMove (squareChoice) {
+  if (!moved) {
+  const squareId = '#' + squareChoice
+  if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
+    comp === 'X' ? $(squareId).text('X') : $(squareId).text('O')
+    xTurn === true ? xTrack.push(squareChoice) : oTrack.push(squareChoice)
+    $(squareId).off('click')
+    usedSquares = xTrack.concat(oTrack)
+    checkWin(xTrack)
+    checkWin(oTrack)
+    if (winner === true) {
+      displayWinner()
+    } else {
+      xTurn ? xTurn = false : xTurn = true
+      displayTurn()
+    }
+    checkTie()
+    moved = true
+  }
+}
+}
+
+// computer decides what square to choose
+function compDecide () {
+  const possibleWin = []
+  const possibleLoss = []
+  let compTrack
+  let playTrack
+  let moved = false
+  player === 'X' ? (playTrack = xTrack) : (playTrack = oTrack)
+  comp === 'X' ? (compTrack = xTrack) : (compTrack = oTrack)
+
+  // looks at what squares the player has chosen and determines how the computer can still win
+  for (let i = 0; i < win.length; i++) {
+    if (
+      !playTrack.includes(win[i][0]) &&
+      !playTrack.includes(win[i][1]) &&
+      !playTrack.includes(win[i][2])
+    ) {
+      possibleWin.push(win[i])
+    }
+  }
+
+  // looks at where the computer could possibly lose
+  for (let i = 0; i < win.length; i++) {
+    if (
+      !compTrack.includes(win[i][0]) &&
+      !compTrack.includes(win[i][1]) &&
+      !compTrack.includes(win[i][2])
+    ) {
+      possibleLoss.push(win[i])
+    }
+  }
+
+  // checks if player has taken middle space, if not, takes middle space, else takes a corner space
+  if (usedSquares.length === 1 && playTrack.includes('4')) {
+    const cornerMove = function () {
+      const corners = ['0', '2', '6', '8']
+      return corners[Math.floor(Math.random() * 4)]
+    }
+    compMove(cornerMove())
+
+  } else if (!usedSquares.includes('4')) {
+    compMove('4')
+  } else {
+    for (let i = 0; i < possibleWin.length; i++) {
+      if (
+        usedSquares.includes(possibleWin[i][0]) &&
+        usedSquares.includes(possibleWin[i][1])
+      ) {
+        compMove(possibleWin[i][2])
+      } else if (
+        usedSquares.includes(possibleWin[i][0]) &&
+        usedSquares.includes(possibleWin[i][2])
+      ) {
+        compMove(possibleWin[i][1])
+      } else if (
+        usedSquares.includes(possibleWin[i][2]) &&
+        usedSquares.includes(possibleWin[i][1])
+      ) {
+        compMove(possibleWin[i][0])
+      }
+    }
+
+    for (let i = 0; i < possibleLoss.length; i++) {
+      if (
+        usedSquares.includes(possibleLoss[i][0]) &&
+      usedSquares.includes(possibleLoss[i][1])
+      ) {
+        compMove(possibleLoss[i][2])
+      } else if (
+        usedSquares.includes(possibleLoss[i][0]) &&
+      usedSquares.includes(possibleLoss[i][2])
+      ) {
+        compMove(possibleLoss[i][1])
+      } else if (
+        usedSquares.includes(possibleLoss[i][2]) &&
+      usedSquares.includes(possibleLoss[i][1])
+      ) {
+        compMove(possibleLoss[i][0])
+      }
+    }
+
+    for (let i = 0; i < possibleWin.length; i++) {
+      if (usedSquares.includes(possibleWin[i][0])) {
+        compMove(possibleWin[i][1])
+      } else if (usedSquares.includes(possibleWin[i][1])) {
+        compMove(possibleWin[i][2])
+      } else if (usedSquares.includes(possibleWin[i][2])) {
+        compMove(possibleWin[i][0])
+      }
+    }
+
+for (let i = 0; i < possibleLoss.length; i++) {
+      if (usedSquares.includes(possibleLoss[i][0])) {
+        compMove(possibleLoss[i][1])
+      } else if (usedSquares.includes(possibleLoss[i][1])) {
+        compMove(possibleLoss[i][2])
+      } else if (usedSquares.includes(possibleLoss[i][2])) {
+        compMove(possibleLoss[i][0])
+      }
+}
+
+if (winner === false && gameOn) {
+  randomChoice()
+}
+}
+}
+
 module.exports = {
   onSignUp,
   onSignIn,
@@ -227,5 +434,6 @@ module.exports = {
   onCreateGame,
   endGame,
   onUpdateGame,
-  onGetGames
+  onGetGames,
+  onCompPlay
 }

@@ -23,7 +23,7 @@ a {
 
 body {
   background-color: $off-white;
-  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Cabin Sketch', helvetica;
   text-align: center;
 }
 
@@ -38,6 +38,24 @@ button {
 
 .credit {
   font-size: 12px;
+}
+
+.comp-play-btn {
+  background-color: black;
+  border-radius: 2px;
+  cursor: pointer;
+  height: 20px;
+  width: 40px;
+}
+
+.on-off {
+  background-color: red;
+  border: 2px solid black;
+  border-radius: 2px;
+  box-shadow: inset 2px 2px 2px;
+  float: left;
+  height: 20px;
+  width: 20px;
 }
 
 .display-name {
@@ -97,8 +115,8 @@ nav {
   text-align: right;
 }
 
-.new-game-btn {
-  margin-top: 20px;
+.play-mode {
+  margin-top: 15px;
 }
 
 .player-history {
@@ -176,6 +194,7 @@ nav {
 }
 
 .square {
+  cursor: pointer;
   float: left;
   font-size: 80px;
   height: 100px;
@@ -196,13 +215,14 @@ nav {
   display: inline-block;
   height: 100px;
   width: 100px;
+  margin: 0 20px;
 }
 
 .side-title {
   display: inline-block;
   height: 100px;
   margin-left: -676px;
-  margin-top: 200px;
+  margin-top: 250px;
   position: absolute;
   transform: rotate(-90deg);
 }
@@ -218,22 +238,16 @@ nav {
   text-align: center;
 }
 
-@media (max-width: 600px) {
-  .top-title {
-    float: left;
-    width: 100%;
-  }
-
-  .player-1-symbol {
-    float: clear;
-  }
-}
-
 @media (max-width: 1200px) {
   .square {
     font-size: 60px;
     height: 80px;
     line-height: 80px;
     width: 80px;
+  }
+
+  .side-title {
+    transform: rotate(90deg);
+    margin-left: -587px;
   }
 }
