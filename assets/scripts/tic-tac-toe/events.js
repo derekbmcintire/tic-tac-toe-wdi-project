@@ -101,6 +101,7 @@ let xTurn = true
 let winner = false
 let xTrack = []
 let oTrack = []
+let playComp = false
 const squares = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
 const win = [
   ['0', '1', '2'],
@@ -112,6 +113,17 @@ const win = [
   ['0', '4', '8'],
   ['2', '4', '6']
 ]
+
+// on comp play click
+const onCompPlay = function () {
+  if (!playComp) {
+    $('#on-off').css({'float': 'right', 'background-color': 'green'})
+    playComp = true
+  } else if (playComp) {
+    $('#on-off').css({'float': 'left', 'background-color': 'red'})
+    playComp = false
+  }
+}
 
 // check for tie
 const checkTie = function () {
@@ -227,5 +239,6 @@ module.exports = {
   onCreateGame,
   endGame,
   onUpdateGame,
-  onGetGames
+  onGetGames,
+  onCompPlay
 }

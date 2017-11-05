@@ -23,7 +23,7 @@ a {
 
 body {
   background-color: $off-white;
-  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Cabin Sketch', helvetica;
   text-align: center;
 }
 
@@ -38,6 +38,25 @@ button {
 
 .credit {
   font-size: 12px;
+}
+
+.comp-play-btn {
+  background-color: black;
+  border-radius: 2px;
+  cursor: pointer;
+  margin: 30px;
+  height: 20px;
+  width: 40px;
+}
+
+.on-off {
+  background-color: red;
+  border: 2px solid black;
+  border-radius: 2px;
+  box-shadow: inset 2px 2px 2px;
+  float: left;
+  height: 20px;
+  width: 20px;
 }
 
 .display-name {
