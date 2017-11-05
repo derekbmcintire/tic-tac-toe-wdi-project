@@ -81,7 +81,7 @@ input {
 .log {
   background: transparent;
   border: 0;
-  color: $orange;
+  color: $off-white;
   outline: 0;
 }
 
@@ -91,6 +91,7 @@ input {
 
 nav {
   font-family: helvetica;
+  font-weight: bold;
   max-width: 800px;
   padding-right: 25px;
   text-align: right;
@@ -98,6 +99,10 @@ nav {
 
 .new-game-btn {
   margin-top: 20px;
+}
+
+.player-history {
+  color: $orange;
 }
 
 .sign-btn {
