@@ -17,10 +17,6 @@
 
   <!-- Sign In/Up Container-->
   <div class="sign-in-container">
-    <div class="comp-play-btn" id="comp-play">
-      <div class="on-off" id="on-off">
-      </div>
-    </div>
     <h1 class='sign-in-title'>Tic Tac Toe</h1>
     <h4 class="sign-in-test">Sign in to play!</h4>
     <div id="button-wrap">
@@ -136,16 +132,16 @@
 
           <div class="top top-left">
 
-            <h3>Player 1</h3>
-            <div class="symbol player-1-symbol">
+            <h4 id="p1">Player 1</h4>
+            <div class="symbol" id="player-1-symbol">
               X
             </div>
             <h4 class="score">Wins: <span id="1-wins"></span></h4>
           </div>
 
           <div class="top top-right">
-            <h3>Player 2</h3>
-            <div class="symbol player-2-symbol">
+            <h4 id="p2">Player 2</h4>
+            <div class="symbol" id="player-2-symbol">
               O
             </div>
             <h4 class="score">Wins: <span id="2-wins"></span></h4>
@@ -154,6 +150,15 @@
         </section>
 
     <br />
+
+    <div class="play-mode">
+      <h4>Play Mode:</h4>
+    <div class="comp-play-btn" id="comp-play">
+      <div class="on-off" id="on-off">
+      </div>
+    </div>
+    <p id="current-mode">Player vs Player</p>
+    </div>
 
         <button class="new-game-btn" id="new-game">New Game</button>
         <div class="message">
