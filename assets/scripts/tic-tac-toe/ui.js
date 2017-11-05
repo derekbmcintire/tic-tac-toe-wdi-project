@@ -106,10 +106,16 @@ const checkPastWin = function (tracked) {
   }
 }
 
+// check users win average
+const winAvg = function (games, wins) {
+  return Math.round(100 / (games / wins))
+}
+
 const getGamesSuccess = function (data) {
   $('#player-history').text(store.user.email)
   $('#games-played').text(' ' + data.games.length)
   $('#games-won').text(' ' + checkWinHistory(data) + ' games')
+  $('#win-avg').text(' ' + winAvg(data.games.length, checkWinHistory(data)))
 }
 
 const getGamesFailure = function () {
