@@ -258,7 +258,7 @@ const displayWinner = function () {
         $('#2-wins').text(wins2 + 1)
         wins2++
       } else {
-        $('#info').text('You lost to the computer!')
+        $('#info').text('You beat the computer!')
         $('#1-wins').text(wins1 + 1)
         wins1++
       }
@@ -324,7 +324,7 @@ function compMove (squareChoice) {
       if (winner === true) {
         displayWinner()
       } else {
-        xTurn ? xTurn = false : xTurn = true
+        switchTurn()
         displayTurn()
       }
       checkTie()

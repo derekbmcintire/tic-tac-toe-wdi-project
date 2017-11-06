@@ -40,7 +40,7 @@ const signOutSuccess = function () {
 }
 
 const signOutFailure = function () {
-  console.log('sign out failed')
+  $('#info').text('Failed to sign out')
 }
 
 const changePasswordSuccess = function () {
@@ -54,20 +54,18 @@ const changePasswordFailure = function () {
 
 const createGameSuccess = function (data) {
   store.game = data.game
-  console.log(store.game)
 }
 
 const createGameFailure = function () {
-  console.log('failed to create new game')
+  $('#info').text('Failed to create new game')
 }
 
 const updateGameSuccess = function (data) {
   store.game = data.game
-  console.log(store.game)
 }
 
 const updateGameFailure = function () {
-  console.log('failed to update game')
+  $('#info').text('Failed to update game')
 }
 
 // check win history for current user
