@@ -1,0 +1,30 @@
+.log {
+  background: transparent;
+  border: 0;
+  color: $off-white;
+  outline: 0;
+}
+
+.sign-btn {
+  border: 0;
+  font-size: 35px;
+  padding: 0;
+  &:hover {
+    font-size: 45px;
+    outline: 0;
+  }
+}
+
+.sign-in-container {
+  margin-top: 25vh;
+}
+
+.sign-in-title {
+  color: $darker-blue;
+}
+
+.sign-in-up {
+  max-width: 400px;
+  min-width: 200px;
+  width: 50%;
+}

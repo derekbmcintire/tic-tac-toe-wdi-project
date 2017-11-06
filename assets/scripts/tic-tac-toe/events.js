@@ -257,19 +257,18 @@ const displayWinner = function () {
   }
 }
 
-
-/************ Play Against Computer **************/
+/************ Computer Game Logic *********************/
 
 // on comp play click
 const onCompPlay = function () {
   if (!playComp) {
-    $('#on-off').css({'float': 'right', 'background-color': 'green'})
+    $('#on-off').css({'float': 'right', 'background-color': '#00FF00'})
     $('#current-mode').text('Player vs Computer')
     $('#p2').text('Computer')
     whoGoesFirst()
     playComp = true
   } else if (playComp) {
-    $('#on-off').css({'float': 'left', 'background-color': 'red'})
+    $('#on-off').css({'float': 'left', 'background-color': '#8B1A1A'})
     $('#current-mode').text('Player vs Player')
     $('#player-2-symbol').html('O')
     $('#player-1-symbol').html('X')
@@ -303,24 +302,24 @@ function randomChoice () {
 // computer chooses a square
 function compMove (squareChoice) {
   if (!moved) {
-  const squareId = '#' + squareChoice
-  if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
-    comp === 'X' ? $(squareId).text('X') : $(squareId).text('O')
-    xTurn === true ? xTrack.push(squareChoice) : oTrack.push(squareChoice)
-    $(squareId).off('click')
-    usedSquares = xTrack.concat(oTrack)
-    checkWin(xTrack)
-    checkWin(oTrack)
-    if (winner === true) {
-      displayWinner()
-    } else {
-      xTurn ? xTurn = false : xTurn = true
-      displayTurn()
+    const squareId = '#' + squareChoice
+    if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
+      comp === 'X' ? $(squareId).text('X') : $(squareId).text('O')
+      xTurn === true ? xTrack.push(squareChoice) : oTrack.push(squareChoice)
+      $(squareId).off('click')
+      usedSquares = xTrack.concat(oTrack)
+      checkWin(xTrack)
+      checkWin(oTrack)
+      if (winner === true) {
+        displayWinner()
+      } else {
+        xTurn ? xTurn = false : xTurn = true
+        displayTurn()
+      }
+      checkTie()
+      moved = true
     }
-    checkTie()
-    moved = true
   }
-}
 }
 
 // computer decides what square to choose
@@ -329,7 +328,6 @@ function compDecide () {
   const possibleLoss = []
   let compTrack
   let playTrack
-  let moved = false
   player === 'X' ? (playTrack = xTrack) : (playTrack = oTrack)
   comp === 'X' ? (compTrack = xTrack) : (compTrack = oTrack)
 
@@ -362,7 +360,6 @@ function compDecide () {
       return corners[Math.floor(Math.random() * 4)]
     }
     compMove(cornerMove())
-
   } else if (!usedSquares.includes('4')) {
     compMove('4')
   } else {
@@ -414,7 +411,7 @@ function compDecide () {
       }
     }
 
-for (let i = 0; i < possibleLoss.length; i++) {
+    for (let i = 0; i < possibleLoss.length; i++) {
       if (usedSquares.includes(possibleLoss[i][0])) {
         compMove(possibleLoss[i][1])
       } else if (usedSquares.includes(possibleLoss[i][1])) {
@@ -422,12 +419,12 @@ for (let i = 0; i < possibleLoss.length; i++) {
       } else if (usedSquares.includes(possibleLoss[i][2])) {
         compMove(possibleLoss[i][0])
       }
-}
+    }
 
-if (winner === false && gameOn) {
-  randomChoice()
-}
-}
+    if (winner === false && gameOn) {
+      randomChoice()
+    }
+  }
 }
 
 module.exports = {

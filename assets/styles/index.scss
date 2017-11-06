@@ -1,12 +1,11 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
 @import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
-
-$off-white: #ececea;
-$lighter-blue: #74afad;
-$darker-blue: #558c89;
-$orange: #ffa500;
-$black: #000;
+@import 'theme';
+@import 'board';
+@import 'nav';
+@import 'computer-play';
+@import 'sign-in';
 
 * {
   margin: 0 auto;
@@ -36,48 +35,6 @@ button {
   }
 }
 
-.credit {
-  font-size: 12px;
-}
-
-.comp-play-btn {
-  background-color: black;
-  border-radius: 2px;
-  cursor: pointer;
-  height: 20px;
-  width: 40px;
-}
-
-.on-off {
-  background-color: red;
-  border: 2px solid black;
-  border-radius: 2px;
-  box-shadow: inset 2px 2px 2px;
-  float: left;
-  height: 20px;
-  width: 20px;
-}
-
-.display-name {
-  display: inline-block;
-  float: left;
-}
-
-.game-container {
-  background-color: $lighter-blue;
-  border-left: 3px solid $black;
-  border-right: 3px solid $black;
-  height: 100vh;
-  max-width: 800px;
-  min-height: 800px;
-  padding: 10px;
-}
-
-.game-board-wrap {
-  display: inline-block;
-  margin: 15px auto;
-}
-
 h1 {
   color: $off-white;
   font-size: 65px;
@@ -96,158 +53,16 @@ input {
   margin: 5px;
 }
 
-.log {
-  background: transparent;
-  border: 0;
-  color: $off-white;
-  outline: 0;
-}
-
-.modal-body {
-  font-family: helvetica;
-}
-
-nav {
-  font-family: helvetica;
-  font-weight: bold;
-  max-width: 800px;
-  padding-right: 25px;
-  text-align: right;
-}
-
-.play-mode {
-  margin-top: 15px;
-}
-
-.player-history {
-  color: $orange;
-}
-
-.sign-btn {
-  border: 0;
-  font-size: 35px;
-  padding: 0;
-  &:hover {
-    outline: 0;
-    font-size: 45px;
-  }
-}
-
-.sign-in-container {
-  margin-top: 25vh;
-}
-
-.sign-in-title {
-  color: $darker-blue;
-}
-
-.sign-in-up {
-  width: 50%;
-  min-width: 200px;
-  max-width: 400px;
-}
-
-.sq-zero {
-  border-bottom: 3px solid $darker-blue;
-  border-right: 3px solid $darker-blue;
-}
-
-.sq-one {
-  border: 3px solid $darker-blue;
-  border-top: 0;
-}
-
-.sq-two {
-  border-bottom: 3px solid $darker-blue;
-  border-left: 3px solid $darker-blue;
-}
-
-.sq-three {
-  border: 3px solid $darker-blue;
-  border-left: 0;
-  clear: left;
-}
-
-.sq-four {
-  border: 3px solid $darker-blue;
-}
-
-.sq-five {
-  border: 3px solid $darker-blue;
-  border-right: 0;
-}
-
-.sq-six {
-  border-right: 3px solid $darker-blue;
-  border-top: 3px solid $darker-blue;
-  clear: left;
-}
-
-.sq-seven {
-  border: 3px solid $darker-blue;
-  border-bottom: 0;
-}
-
-.sq-eight {
-  border-left: 3px solid $darker-blue;
-  border-top: 3px solid $darker-blue;
-}
-
-.square {
-  cursor: pointer;
-  float: left;
-  font-size: 80px;
-  height: 100px;
-  line-height: 100px;
-  margin: 15;
-  width: 100px;
-}
-
-.symbol {
-  border: 3px solid $darker-blue;
-  font-size: 50px;
-  height: 60px;
-  line-height: 60px;
-  width: 60px;
-}
-
-.top {
-  display: inline-block;
-  height: 100px;
-  width: 100px;
-  margin: 0 20px;
-}
-
-.side-title {
-  display: inline-block;
-  height: 100px;
-  margin-left: -676px;
-  margin-top: 250px;
-  position: absolute;
-  transform: rotate(-90deg);
-}
-
-.side-text {
-  color: black;
-  font-size: 100px;
-}
-
-.top-wrap {
-  margin: 0 auto;
-  margin-bottom: -30px;
-  text-align: center;
-}
-
 @media (max-width: 1200px) {
+  .side-title {
+    margin-left: -587px;
+    transform: rotate(90deg);
+  }
+
   .square {
     font-size: 60px;
     height: 80px;
     line-height: 80px;
     width: 80px;
-  }
-
-  .side-title {
-    transform: rotate(90deg);
-    margin-left: -587px;
   }
 }
