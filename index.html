@@ -65,6 +65,9 @@
       <button type="button" class="log" data-toggle="modal" data-target="#change-password-modal">
           Change Password
         </button> |
+        <button type="button" class="log" id="join-btn" data-toggle="modal" data-target="#join-game-modal">
+          Join Game
+        </button> |
       <button type="button" class="log" id="sign-out-button">
           Sign Out
         </button> |
@@ -113,6 +116,32 @@
             <h3>Games Played:<span id="games-played"></span></h3>
             <h3>Games Won:<span id="games-won"></span></h3>
             <h3>Win Average:<span id="win-avg"></span>%</h3>
+            <!-- End Modal Body -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Join Game Modal -->
+    <div class="modal fade" id="join-game-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Join Game</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Modal Body -->
+            <form class="sign-in-up" id="form-join">
+              <input type="text" name="join[id]" class="form-control" placeholder="Enter game ID">
+              <button type="submit" class="btn btn-primary">Submit</button> <br />
+            </form>
+            <h3 id="message-join"></h3>
             <!-- End Modal Body -->
           </div>
           <div class="modal-footer">

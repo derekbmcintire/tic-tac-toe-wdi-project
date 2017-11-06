@@ -65,6 +65,15 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
+// on join game
+const onJoin = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  api.joinGame(data)
+    .then(ui.joinGameSuccess)
+    .catch(ui.joinGameFailure)
+}
+
 /***************** API GAME HANDLERS ********************/
 
 // on create game
@@ -449,5 +458,6 @@ module.exports = {
   endGame,
   onUpdateGame,
   onGetGames,
-  onCompPlay
+  onCompPlay,
+  onJoin
 }

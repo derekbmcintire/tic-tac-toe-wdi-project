@@ -54,6 +54,7 @@ const changePasswordFailure = function () {
 
 const createGameSuccess = function (data) {
   store.game = data.game
+  console.log(store.game)
 }
 
 const createGameFailure = function () {
@@ -62,6 +63,8 @@ const createGameFailure = function () {
 
 const updateGameSuccess = function (data) {
   store.game = data.game
+  console.log('game updated')
+  console.log(store.game)
 }
 
 const updateGameFailure = function () {
@@ -122,6 +125,16 @@ const getGamesFailure = function () {
   $('#games-played').text('Error finding game history')
 }
 
+const joinGameSuccess = function (data) {
+  store.game = data.game
+  console.log(store.game)
+  $('#message-join').text('Game joined successfully')
+}
+
+const joinGameFailure = function () {
+  $('#message-join').text('Failed to join game')
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -136,5 +149,7 @@ module.exports = {
   updateGameSuccess,
   updateGameFailure,
   getGamesSuccess,
-  getGamesFailure
+  getGamesFailure,
+  joinGameSuccess,
+  joinGameFailure
 }
