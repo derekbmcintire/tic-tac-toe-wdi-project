@@ -447,6 +447,82 @@ function compDecide () {
   }
 }
 
+/*************** Join Game Logic *******************/
+
+// const onGetGames = function (event) {
+//   event.preventDefault()
+//   api.getGames()
+//     .then(ui.getGamesSuccess)
+//     .catch(ui.getGamesFailure)
+// }
+
+let gameUpdated = false
+let user
+
+const onGetGame = function () {
+  api.getGame()
+    .then(ui.getGameSuccess)
+    .catch(getGameFail)
+}
+
+const getGameFail = function () {
+  gameUpdated = true
+  console.log('ya failed buddy')
+}
+
+const setPlayers = function () {
+  console.log('player x' + store.game.player_x.email)
+  console.log('user' + store.user.email)
+  if (store.game.player_x.email === store.user.email) {
+    user = 'player X'
+  } else {
+    user = 'player O'
+  }
+}
+
+const setUpJoinedGame = function () {
+  onGetGame()
+  setPlayers()
+  console.log('user is ' + user)
+  const currentX = []
+  const currentO = []
+  for (let i = 0; i < store.game.cells.length; i++) {
+    if (i === 'X') {
+      currentX.push(i)
+    } else if (i === 'O') {
+      currentO.push(i)
+    }
+  }
+  if (currentX.length > currentO.length) {
+    xTurn = false
+  } else {
+    xTurn = true
+  }
+  console.log(currentX)
+  console.log(currentO)
+  console.log(store.game)
+  if (user === 'player X' && !xTurn) {
+    squares.map((x) => $('#' + x).off('click'))
+    console.log('not X turn')
+  } else if (user === 'player X' && xTurn) {
+    squares.map((x) => $('#' + x).on('click', onSquareClick))
+    console.log('x turn')
+  } else if (user === 'player O' && xTurn) {
+    squares.map((x) => $('#' + x).off('click'))
+    console.log('not o turn')
+  } else if (user === 'player O' && !xTurn) {
+    squares.map((x) => $('#' + x).on('click', onSquareClick))
+    console.log('o turn')
+  }
+}
+
+$('#temp-button').on('click', setUpJoinedGame)
+
+// get game
+// get game again every second
+// check to see if it matches current gamestate
+// if not, change turns and let player go
+
 module.exports = {
   onSignUp,
   onSignIn,
@@ -459,5 +535,6 @@ module.exports = {
   onUpdateGame,
   onGetGames,
   onCompPlay,
-  onJoin
+  onJoin,
+  onGetGame
 }

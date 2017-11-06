@@ -7,6 +7,8 @@ const store = {
       },
       over: false
     }
+  },
+  currentGame: {
   }
 }
 

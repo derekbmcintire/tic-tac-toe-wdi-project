@@ -135,6 +135,15 @@ const joinGameFailure = function () {
   $('#message-join').text('Failed to join game')
 }
 
+const getGameSuccess = function (data) {
+  console.log(data)
+  store.currentGame = data.game
+}
+
+const getGameFailure = function () {
+  console.log('ya failed buddy!')
+}
+
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -151,5 +160,7 @@ module.exports = {
   getGamesSuccess,
   getGamesFailure,
   joinGameSuccess,
-  joinGameFailure
+  joinGameFailure,
+  getGameSuccess,
+  getGameFailure
 }
