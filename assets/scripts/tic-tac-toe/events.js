@@ -185,6 +185,7 @@ const startGame = function () {
   xTrack = []
   oTrack = []
   usedSquares = []
+  moved = false
   squares.map((x) => $('#' + x).on('click', onSquareClick))
   displayTurn()
 }
@@ -206,11 +207,16 @@ $('#new-game').on('click', function () {
   clearGame()
   $('#info').show()
   startGame()
+  console.log(playComp)
+  console.log(player)
+  console.log(xTurn)
+  console.log(gameOn)
+  console.log(winner)
   if (playComp) {
-    if (player !== 'X') {
+    if (comp === 'X') {
       setTimeout(function () {
         compDecide()
-      }, 1000)
+      }, 500)
     }
   }
 })
