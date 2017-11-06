@@ -1,0 +1,49 @@
+$off-white: #ececea;
+$lighter-blue: #74afad;
+$darker-blue: #558c89;
+$orange: #ffa500;
+$black: #000;
+
+.credit {
+  font-size: 12px;
+}
+
+.display-name {
+  display: inline-block;
+  float: left;
+}
+
+.side-text {
+  color: black;
+  font-size: 100px;
+}
+
+.side-title {
+  display: inline-block;
+  height: 100px;
+  margin-left: -676px;
+  margin-top: 250px;
+  position: absolute;
+  transform: rotate(-90deg);
+}
+
+.symbol {
+  border: 3px solid $darker-blue;
+  font-size: 50px;
+  height: 60px;
+  line-height: 60px;
+  width: 60px;
+}
+
+.top {
+  display: inline-block;
+  height: 100px;
+  margin: 0 20px;
+  width: 100px;
+}
+
+.top-wrap {
+  margin: 0 auto;
+  margin-bottom: -30px;
+  text-align: center;
+}

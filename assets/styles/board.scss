@@ -1,0 +1,70 @@
+.game-board-wrap {
+  display: inline-block;
+  margin: 15px auto;
+}
+
+.game-container {
+  background-color: $lighter-blue;
+  border-left: 3px solid $black;
+  border-right: 3px solid $black;
+  height: 100vh;
+  max-width: 800px;
+  min-height: 800px;
+  padding: 10px;
+}
+
+.sq-zero {
+  border-bottom: 3px solid $darker-blue;
+  border-right: 3px solid $darker-blue;
+}
+
+.sq-one {
+  border: 3px solid $darker-blue;
+  border-top: 0;
+}
+
+.sq-two {
+  border-bottom: 3px solid $darker-blue;
+  border-left: 3px solid $darker-blue;
+}
+
+.sq-three {
+  border: 3px solid $darker-blue;
+  border-left: 0;
+  clear: left;
+}
+
+.sq-four {
+  border: 3px solid $darker-blue;
+}
+
+.sq-five {
+  border: 3px solid $darker-blue;
+  border-right: 0;
+}
+
+.sq-six {
+  border-right: 3px solid $darker-blue;
+  border-top: 3px solid $darker-blue;
+  clear: left;
+}
+
+.sq-seven {
+  border: 3px solid $darker-blue;
+  border-bottom: 0;
+}
+
+.sq-eight {
+  border-left: 3px solid $darker-blue;
+  border-top: 3px solid $darker-blue;
+}
+
+.square {
+  cursor: pointer;
+  float: left;
+  font-size: 80px;
+  height: 100px;
+  line-height: 100px;
+  margin: 15;
+  width: 100px;
+}
