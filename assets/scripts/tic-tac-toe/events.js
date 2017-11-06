@@ -2,6 +2,7 @@ const getFormFields = require(`../../../lib/get-form-fields`)
 const api = require('./api')
 const ui = require('./ui')
 const store = require('../store.js')
+const displays = require('./displays')
 
 /**************** SET UP ***********************************/
 
@@ -207,11 +208,6 @@ $('#new-game').on('click', function () {
   clearGame()
   $('#info').show()
   startGame()
-  console.log(playComp)
-  console.log(player)
-  console.log(xTurn)
-  console.log(gameOn)
-  console.log(winner)
   if (playComp) {
     if (comp === 'X') {
       setTimeout(function () {
@@ -244,16 +240,29 @@ const displayTurn = function () {
 // display winner in the info element and disable squares
 const displayWinner = function () {
   if (winner) {
+    displays.displayFlashes()
     store.currentGameState.game.over = true
-    const winningPlayer = xTurn ? '2' : '1'
-    if (winningPlayer === '1') {
-      $('#1-wins').text(wins1 + 1)
-      wins1++
-    } else {
-      $('#2-wins').text(wins2 + 1)
-      wins2++
+    if (!playComp) {
+      const winningPlayer = xTurn ? '2' : '1'
+      if (winningPlayer === '1') {
+        $('#1-wins').text(wins1 + 1)
+        wins1++
+      } else {
+        $('#2-wins').text(wins2 + 1)
+        wins2++
+      }
+      $('#info').text('Player ' + winningPlayer + ' has won!')
+    } else if (playComp) {
+      if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
+        $('#info').text('You lost to the computer!')
+        $('#2-wins').text(wins2 + 1)
+        wins2++
+      } else {
+        $('#info').text('You lost to the computer!')
+        $('#1-wins').text(wins1 + 1)
+        wins1++
+      }
     }
-    $('#info').text('Player ' + winningPlayer + ' has won!')
   }
 }
 
@@ -270,12 +279,14 @@ const onCompPlay = function () {
   } else if (playComp) {
     $('#on-off').css({'float': 'left', 'background-color': '#8B1A1A'})
     $('#current-mode').text('Player vs Player')
+    $('#p2').text('Player')
     $('#player-2-symbol').html('O')
     $('#player-1-symbol').html('X')
     playComp = false
   }
 }
 
+// determines if computer or user is X - x always goes first
 const whoGoesFirst = function () {
   const x = Math.floor(1 + Math.random() * 2)
   if (x === 2) {
