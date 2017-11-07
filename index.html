@@ -70,7 +70,7 @@
         </button> |
     </nav>
 
-    <!-- Sign Out Modal -->
+    <!-- Change Password Modal -->
     <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -83,15 +83,15 @@
           <div class="modal-body">
             <!-- Modal Body -->
             <form class="sign-in-up" id="form-change-password">
-              <input type="password" name="passwords[old]" class="form-control" placeholder="Enter old password">
-              <input type="password" name="passwords[new]" class="form-control" placeholder="Enter new password">
+              <input type="password" id="old-password" name="passwords[old]" class="form-control" placeholder="Enter old password">
+              <input type="password" id="new-password" name="passwords[new]" class="form-control" placeholder="Enter new password">
               <button type="submit" class="btn btn-primary">Submit</button> <br />
             </form>
             <h3 id="message-change"></h3>
             <!-- End Modal Body -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="close-change-password" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
