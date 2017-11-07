@@ -11,6 +11,8 @@ const wins = [
   ['2', '4', '6']
 ]
 
+let joined = false
+
 const signUpSuccess = function (data) {
   $('#form-sign-up').hide()
   $('#form-sign-in').show()
@@ -54,6 +56,7 @@ const changePasswordFailure = function () {
 
 const createGameSuccess = function (data) {
   store.game = data.game
+  $('#game-id').text(data.game.id)
   console.log(store.game)
 }
 
@@ -63,8 +66,6 @@ const createGameFailure = function () {
 
 const updateGameSuccess = function (data) {
   store.game = data.game
-  console.log('game updated')
-  console.log(store.game)
 }
 
 const updateGameFailure = function () {
@@ -127,7 +128,8 @@ const getGamesFailure = function () {
 
 const joinGameSuccess = function (data) {
   store.game = data.game
-  console.log(store.game)
+  $('#game-id').text(data.game.id)
+  joined = true
   $('#message-join').text('Game joined successfully')
 }
 
@@ -136,7 +138,7 @@ const joinGameFailure = function () {
 }
 
 const getGameSuccess = function (data) {
-  console.log(data)
+  console.log('checked')
   store.currentGame = data.game
 }
 
@@ -162,5 +164,6 @@ module.exports = {
   joinGameSuccess,
   joinGameFailure,
   getGameSuccess,
-  getGameFailure
+  getGameFailure,
+  joined
 }

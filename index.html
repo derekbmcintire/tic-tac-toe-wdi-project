@@ -60,7 +60,7 @@
         <p class="display-name" id="user-display">
         </p>
         <button type="button" id="game-history" class="log" data-toggle="modal" data-target="#history-modal">
-          Game History
+          Stats
         </button> |
       <button type="button" class="log" data-toggle="modal" data-target="#change-password-modal">
           Change Password
@@ -71,6 +71,7 @@
       <button type="button" class="log" id="sign-out-button">
           Sign Out
         </button> |
+        <p class="game-id">game id: <span id="game-id"></span></p>
     </nav>
 
     <!-- Sign Out Modal -->
@@ -145,7 +146,7 @@
             <!-- End Modal Body -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" id="close-joined" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -194,7 +195,8 @@
           <h2 id='info'>X's turn!</h2>
         </div>
 
-        <button id="temp-button">Temp Button</button>
+        <button id="temp-game-update">get update</button>
+        <button id="temp-button">check turn</button>
 
     <br />
 

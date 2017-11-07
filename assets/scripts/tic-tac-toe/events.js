@@ -179,6 +179,10 @@ const onSquareClick = function () {
   displayWinner()
   checkTie()
   onUpdateGame()
+  if (store.currentGame.player_o !== null) {
+    setInterval(onGetGame, 1000)
+    boardUpdate()
+  }
   moved = false
   if (!winner && playComp && gameOn) {
     setTimeout(function () {
@@ -210,6 +214,7 @@ const clearGame = function () {
 const endGame = function () {
   squares.map((x) => $('#' + x).off('click'))
   gameOn = false
+  store.game = false
 }
 
 // start a new game on button click
@@ -456,8 +461,57 @@ function compDecide () {
 //     .catch(ui.getGamesFailure)
 // }
 
-let gameUpdated = false
+const updateBoard = function (arr) {
+  arr.map((x, i) => {
+    $('#' + i).text(x)
+  })
+}
+
+const setUpJoinedGame = function () {
+  updateBoard(store.currentGame.cells)
+  setPlayers()
+
+  const currentX = []
+  const currentO = []
+  for (let i = 0; i < store.currentGame.cells.length; i++) {
+    if (store.currentGame.cells[i] === 'X') {
+      currentX.push(store.currentGame.cells[i])
+    } else if (store.currentGame.cells[i] === 'O') {
+      currentO.push(store.currentGame.cells[i])
+    }
+  }
+  if (currentX.length > currentO.length) {
+    xTurn = false
+  } else {
+    xTurn = true
+  }
+
+  if (user === 'player X' && !xTurn) {
+    console.log('not X turn')
+  } else if (user === 'player X' && xTurn) {
+    console.log('x turn')
+  } else if (user === 'player O' && xTurn) {
+    console.log('not o turn')
+  } else if (user === 'player O' && !xTurn) {
+    console.log('o turn')
+  }
+}
+
+const boardUpdate = setInterval(setUpJoinedGame, 1000)
 let user
+
+const assignClicks = function () {
+  console.log('clicks should start now')
+  startGame()
+  if (store.game.player_o !== null) {
+    setInterval(onGetGame, 1000)
+    boardUpdate()
+
+  } else {
+  }
+}
+
+$('#close-joined').on('click', assignClicks)
 
 const onGetGame = function () {
   api.getGame()
@@ -466,13 +520,10 @@ const onGetGame = function () {
 }
 
 const getGameFail = function () {
-  gameUpdated = true
   console.log('ya failed buddy')
 }
 
 const setPlayers = function () {
-  console.log('player x' + store.game.player_x.email)
-  console.log('user' + store.user.email)
   if (store.game.player_x.email === store.user.email) {
     user = 'player X'
   } else {
@@ -480,42 +531,9 @@ const setPlayers = function () {
   }
 }
 
-const setUpJoinedGame = function () {
-  onGetGame()
-  setPlayers()
-  console.log('user is ' + user)
-  const currentX = []
-  const currentO = []
-  for (let i = 0; i < store.game.cells.length; i++) {
-    if (i === 'X') {
-      currentX.push(i)
-    } else if (i === 'O') {
-      currentO.push(i)
-    }
-  }
-  if (currentX.length > currentO.length) {
-    xTurn = false
-  } else {
-    xTurn = true
-  }
-  console.log(currentX)
-  console.log(currentO)
-  console.log(store.game)
-  if (user === 'player X' && !xTurn) {
-    squares.map((x) => $('#' + x).off('click'))
-    console.log('not X turn')
-  } else if (user === 'player X' && xTurn) {
-    squares.map((x) => $('#' + x).on('click', onSquareClick))
-    console.log('x turn')
-  } else if (user === 'player O' && xTurn) {
-    squares.map((x) => $('#' + x).off('click'))
-    console.log('not o turn')
-  } else if (user === 'player O' && !xTurn) {
-    squares.map((x) => $('#' + x).on('click', onSquareClick))
-    console.log('o turn')
-  }
-}
 
+
+$('#temp-game-update').on('click', onGetGame)
 $('#temp-button').on('click', setUpJoinedGame)
 
 // get game
