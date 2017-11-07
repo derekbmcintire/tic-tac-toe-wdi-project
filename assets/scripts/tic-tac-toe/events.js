@@ -108,7 +108,7 @@ let player
 let comp
 let moved
 let gameOn = false
-const squares = ['0', '1', '2', '3', '4', '5', '6', '7', '8']
+let whoWon = ''
 const win = [
   ['0', '1', '2'],
   ['3', '4', '5'],
@@ -162,8 +162,8 @@ const onSquareClick = function () {
   $(this).off('click')
   store.currentGameState.game.cell.index = this.id
   trackMove(this)
-  checkWin(xTrack)
-  checkWin(oTrack)
+  checkWin(xTrack, 'X')
+  checkWin(oTrack, 'O')
   usedSquares = xTrack.concat(oTrack)
   switchTurn()
   displayTurn()
@@ -221,13 +221,14 @@ $('#new-game').on('click', function () {
 })
 
 // check for win
-function checkWin (tracked) {
+function checkWin (tracked, symbol) {
   for (let i = 0; i < win.length; i++) {
     if (
       tracked.includes(win[i][0]) &&
       tracked.includes(win[i][1]) &&
       tracked.includes(win[i][2])
     ) {
+      whoWon = symbol
       endGame()
       return (winner = true)
     }
@@ -256,12 +257,13 @@ const displayWinner = function () {
       }
       $('#info').text('Player ' + winningPlayer + ' has won!')
     } else if (playComp) {
-      if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
+      console.log(comp)
+      if (comp === whoWon) {
         $('#info').text('You lost to the computer!')
         $('#2-wins').text(wins2 + 1)
         wins2++
       } else {
-        $('#info').text('You lost to the computer!')
+        $('#info').text('You beat the computer!')
         $('#1-wins').text(wins1 + 1)
         wins1++
       }
@@ -327,7 +329,7 @@ function compMove (squareChoice) {
       if (winner === true) {
         displayWinner()
       } else {
-        xTurn ? xTurn = false : xTurn = true
+        switchTurn()
         displayTurn()
       }
       checkTie()

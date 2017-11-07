@@ -20,6 +20,7 @@ const signUpFailure = function () {
   $('#message-up').text('Something went wrong, please try again')
 }
 
+// changes user view to the board and displays their email in the nav
 const signInSuccess = function (data) {
   $('.sign-in-container').hide()
   $('.game-container').show()
@@ -42,9 +43,19 @@ const signOutFailure = function () {
   console.log('sign out failed')
 }
 
+// clears fields and hides form on success, then clears message and sets form
+// to display again a second after the user closes the modal
 const changePasswordSuccess = function () {
-  $('#form-change-password').hide()
   $('#message-change').text('Your password has been changed')
+  $('#old-password').val('')
+  $('#new-password').val('')
+  $('#form-change-password').hide()
+  $('#close-change-password').on('click', function () {
+    $('#message-change').text('')
+    setTimeout(function () {
+      $('#form-change-password').show()
+    }, 1000)
+  })
 }
 
 const changePasswordFailure = function () {
@@ -111,6 +122,7 @@ const winAvg = function (games, wins) {
   return Math.round(100 / (games / wins))
 }
 
+// displays users past games, wins and win average
 const getGamesSuccess = function (data) {
   $('#player-history').text(store.user.email)
   $('#games-played').text(' ' + data.games.length)
