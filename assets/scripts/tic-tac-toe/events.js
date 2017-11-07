@@ -462,6 +462,7 @@ function compDecide () {
 // }
 
 const updateBoard = function (arr) {
+  displayTurn()
   arr.map((x, i) => {
     $('#' + i).text(x)
   })
@@ -471,6 +472,7 @@ const setUpJoinedGame = function () {
   updateBoard(store.currentGame.cells)
   setPlayers()
   displayTurn()
+  checkWin(oTrack)
   displayWinner()
   const currentX = []
   const currentO = []
