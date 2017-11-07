@@ -176,6 +176,9 @@ const onSquareClick = function () {
       compDecide()
     }, 1000)
   }
+  if (playComp) {
+    $('.square').off('click')
+  }
 }
 
 // add click event to all squares
@@ -187,19 +190,19 @@ const startGame = function () {
   oTrack = []
   usedSquares = []
   moved = false
-  squares.map((x) => $('#' + x).on('click', onSquareClick))
+  $('.square').on('click', onSquareClick)
   displayTurn()
 }
 
 // clear gameboard and reset game
 const clearGame = function () {
   endGame()
-  squares.map((x) => $('#' + x).text(''))
+  $('.square').text('')
 }
 
 // disable all squares at end of game-board-wrap
 const endGame = function () {
-  squares.map((x) => $('#' + x).off('click'))
+  $('.square').off('click')
   gameOn = false
 }
 
@@ -329,6 +332,7 @@ function compMove (squareChoice) {
       }
       checkTie()
       moved = true
+      $('.square').on('click', onSquareClick)
     }
   }
 }
