@@ -1,6 +1,5 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
-@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
 @import 'theme';
 @import 'board';
 @import 'nav';
@@ -66,3 +65,5 @@ input {
     width: 80px;
   }
 }
+
+@import url('https://fonts.googleapis.com/css?family=Cabin+Sketch');
