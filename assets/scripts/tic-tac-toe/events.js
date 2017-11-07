@@ -176,9 +176,6 @@ const onSquareClick = function () {
       compDecide()
     }, 1000)
   }
-  if (playComp) {
-    $('.square').off('click')
-  }
 }
 
 // add click event to all squares
@@ -228,8 +225,8 @@ function checkWin (tracked, symbol) {
       tracked.includes(win[i][1]) &&
       tracked.includes(win[i][2])
     ) {
-      whoWon = symbol
       endGame()
+      whoWon = symbol
       return (winner = true)
     }
   }
@@ -257,7 +254,6 @@ const displayWinner = function () {
       }
       $('#info').text('Player ' + winningPlayer + ' has won!')
     } else if (playComp) {
-      console.log(comp)
       if (comp === whoWon) {
         $('#info').text('You lost to the computer!')
         $('#2-wins').text(wins2 + 1)
@@ -324,8 +320,8 @@ function compMove (squareChoice) {
       xTurn === true ? xTrack.push(squareChoice) : oTrack.push(squareChoice)
       $(squareId).off('click')
       usedSquares = xTrack.concat(oTrack)
-      checkWin(xTrack)
-      checkWin(oTrack)
+      checkWin(xTrack, 'X')
+      checkWin(oTrack, 'O')
       if (winner === true) {
         displayWinner()
       } else {
@@ -334,7 +330,6 @@ function compMove (squareChoice) {
       }
       checkTie()
       moved = true
-      $('.square').on('click', onSquareClick)
     }
   }
 }
