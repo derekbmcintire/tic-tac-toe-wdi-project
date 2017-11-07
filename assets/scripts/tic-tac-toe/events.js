@@ -470,7 +470,8 @@ const updateBoard = function (arr) {
 const setUpJoinedGame = function () {
   updateBoard(store.currentGame.cells)
   setPlayers()
-
+  displayTurn()
+  displayWinner()
   const currentX = []
   const currentO = []
   for (let i = 0; i < store.currentGame.cells.length; i++) {
@@ -497,25 +498,27 @@ const setUpJoinedGame = function () {
   }
 }
 
-const boardUpdate = setInterval(setUpJoinedGame, 1000)
-let user
-
-const assignClicks = function () {
-  console.log('clicks should start now')
-  startGame()
-  if (store.game.player_o !== null) {
-    setInterval(onGetGame, 1000)
-    boardUpdate()
-  }
-}
-
-$('#close-joined').on('click', assignClicks)
-
 const onGetGame = function () {
   api.getGame()
     .then(ui.getGameSuccess)
     .catch(getGameFail)
 }
+
+const boardUpdate = setInterval(setUpJoinedGame, 1000)
+const checkGame = setInterval(onGetGame, 1000)
+let user
+
+const assignClicks = function () {
+  console.log('clicks should start now')
+  startGame()
+  $('#info').show()
+  if (store.game.player_o !== null) {
+    checkGame()
+    boardUpdate()
+  }
+}
+
+$('#close-joined').on('click', assignClicks)
 
 const getGameFail = function () {
   console.log('ya failed buddy')
@@ -528,9 +531,6 @@ const setPlayers = function () {
     user = 'player O'
   }
 }
-
-$('#temp-game-update').on('click', onGetGame)
-$('#temp-button').on('click', setUpJoinedGame)
 
 // get game
 // get game again every second

@@ -69,7 +69,6 @@ const updateGameSuccess = function (data) {
 }
 
 const updateGameFailure = function () {
-  $('#info').text('Failed to update game')
 }
 
 // check win history for current user
