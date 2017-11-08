@@ -147,6 +147,7 @@ const trackMove = function (square) {
 // add symbols to board and disable click function
 const onSquareClick = function () {
   if (playComp) {
+    $('.square').off('click')
     if (player === 'X') {
       $(this).text('X')
       store.currentGameState.game.cell.value = 'X'
@@ -331,6 +332,7 @@ function compMove (squareChoice) {
       checkTie()
       moved = true
     }
+    addClickAgain()
   }
 }
 
