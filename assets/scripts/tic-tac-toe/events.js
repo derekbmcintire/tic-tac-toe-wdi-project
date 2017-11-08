@@ -4,7 +4,7 @@ const ui = require('./ui')
 const store = require('../store.js')
 const displays = require('./displays')
 
-/**************** SET UP ***********************************/
+/* --------------- SET UP ----------------- */
 
 // hide game container and sign in/sign up forms
 $('.game-container').hide()
@@ -12,7 +12,7 @@ $('#side-title-div').hide()
 $('#form-sign-in').hide()
 $('#form-sign-up').hide()
 
-/************* API SIGN IN/SIGN OUT *************************/
+/* ---------------  API SIGN IN/SIGN OUT ----------------- */
 
 // show sign in form
 const showSignIn = function () {
@@ -65,7 +65,7 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
-/***************** API GAME HANDLERS ********************/
+/* ---------------  API GAME HANDLERS ----------------- */
 
 // on create game
 const onCreateGame = function (event) {
@@ -90,7 +90,7 @@ const onGetGames = function (event) {
     .catch(ui.getGamesFailure)
 }
 
-/***************** GAME LOGIC ************************/
+/* ---------------  GAME LOGIC ----------------- */
 
 let wins1 = 0
 let wins2 = 0
@@ -226,8 +226,8 @@ function checkWin (tracked, symbol) {
       tracked.includes(win[i][1]) &&
       tracked.includes(win[i][2])
     ) {
-      whoWon = symbol
       endGame()
+      whoWon = symbol
       return (winner = true)
     }
   }
@@ -255,7 +255,6 @@ const displayWinner = function () {
       }
       $('#info').text('Player ' + winningPlayer + ' has won!')
     } else if (playComp) {
-      console.log(comp)
       if (comp === whoWon) {
         $('#info').text('You lost to the computer!')
         $('#2-wins').text(wins2 + 1)
@@ -282,7 +281,7 @@ const addClickAgain = function () {
   }
 }
 
-/************ Computer Game Logic *********************/
+/* ---------------  Computer Game Logic ----------------- */
 
 // on comp play click
 const onCompPlay = function () {
@@ -329,14 +328,15 @@ function randomChoice () {
 // computer chooses a square
 function compMove (squareChoice) {
   if (!moved) {
+    $('.square').off('click')
     const squareId = '#' + squareChoice
     if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
       comp === 'X' ? $(squareId).text('X') : $(squareId).text('O')
       xTurn === true ? xTrack.push(squareChoice) : oTrack.push(squareChoice)
       $(squareId).off('click')
       usedSquares = xTrack.concat(oTrack)
-      checkWin(xTrack)
-      checkWin(oTrack)
+      checkWin(xTrack, 'X')
+      checkWin(oTrack, 'O')
       if (winner === true) {
         displayWinner()
       } else {
