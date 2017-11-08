@@ -210,6 +210,7 @@ $('#new-game').on('click', function () {
   $('#info').show()
   startGame()
   if (playComp) {
+    changeSymbol()
     if (comp === 'X') {
       setTimeout(function () {
         compDecide()
@@ -268,6 +269,21 @@ const displayWinner = function () {
   }
 }
 
+// have user and comp switch X and O after each games
+const changeSymbol = function () {
+  if (player === 'X') {
+    $('#player-2-symbol').html('X')
+    $('#player-1-symbol').html('O')
+    player = 'O'
+    comp = 'X'
+  } else {
+    $('#player-2-symbol').html('O')
+    $('#player-1-symbol').html('X')
+    player = 'X'
+    comp = 'O'
+  }
+}
+
 // add click event to empty usedSquares
 const addClickAgain = function () {
   for (let i = 0; i < 9; i++) {
@@ -289,7 +305,7 @@ const onCompPlay = function () {
     $('#on-off').css({'float': 'right', 'background-color': '#00FF00'})
     $('#current-mode').text('Player vs Computer')
     $('#p2').text('Computer')
-    whoGoesFirst()
+    // whoGoesFirst()
     playComp = true
   } else if (playComp) {
     $('#on-off').css({'float': 'left', 'background-color': '#8B1A1A'})
@@ -302,18 +318,18 @@ const onCompPlay = function () {
 }
 
 // determines if computer or user is X - x always goes first
-const whoGoesFirst = function () {
-  const x = Math.floor(1 + Math.random() * 2)
-  if (x === 2) {
-    $('#player-2-symbol').html('X')
-    $('#player-1-symbol').html('O')
-    player = 'O'
-    comp = 'X'
-  } else {
-    player = 'X'
-    comp = 'O'
-  }
-}
+// const whoGoesFirst = function () {
+//   const x = Math.floor(1 + Math.random() * 2)
+//   if (x === 2) {
+//     $('#player-2-symbol').html('X')
+//     $('#player-1-symbol').html('O')
+//     player = 'O'
+//     comp = 'X'
+//   } else {
+//     player = 'X'
+//     comp = 'O'
+//   }
+// }
 
 // tells computer to choose a random square
 function randomChoice () {
