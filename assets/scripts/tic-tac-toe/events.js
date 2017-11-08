@@ -135,7 +135,9 @@ const checkTie = function () {
   if (usedSquares.length === 9 && !winner) {
     store.currentGameState.game.over = true
     $('#info').text('It\'s a tie!')
-    endGame()
+    setTimeout(function () {
+      endGame()
+    }, 1000)
   }
 }
 
@@ -239,7 +241,9 @@ function checkWin (tracked) {
       tracked.includes(win[i][1]) &&
       tracked.includes(win[i][2])
     ) {
-      endGame()
+      setTimeout(function () {
+        endGame()
+      }, 1000)
       return (winner = true)
     }
   }
@@ -254,6 +258,9 @@ const displayTurn = function () {
 // display winner in the info element and disable squares
 const displayWinner = function () {
   if (winner) {
+    clearInterval(boardUpdate)
+    clearInterval(checkGame)
+    console.log(xTurn)
     displays.displayFlashes()
     store.currentGameState.game.over = true
     if (!playComp) {
@@ -468,20 +475,35 @@ const updateBoard = function (arr) {
   })
 }
 
+const checkGameOver = function () {
+  if (store.currentGame.over) {
+    displayWinner()
+  }
+}
+
 const setUpJoinedGame = function () {
   updateBoard(store.currentGame.cells)
   setPlayers()
   displayTurn()
-  checkWin(oTrack)
-  displayWinner()
+  checkGameOver()
   const currentX = []
   const currentO = []
   for (let i = 0; i < store.currentGame.cells.length; i++) {
     if (store.currentGame.cells[i] === 'X') {
-      currentX.push(store.currentGame.cells[i])
+      currentX.push(i.toString())
     } else if (store.currentGame.cells[i] === 'O') {
-      currentO.push(store.currentGame.cells[i])
+      currentO.push(i.toString())
     }
+  }
+  checkTie()
+  checkWin(currentX)
+  checkWin(currentO)
+  console.log(xTrack)
+  console.log(currentX)
+  console.log(oTrack)
+  console.log(currentO)
+  if (winner) {
+    displayWinner()
   }
   if (currentX.length > currentO.length) {
     xTurn = false
@@ -506,8 +528,8 @@ const onGetGame = function () {
     .catch(getGameFail)
 }
 
-const boardUpdate = setInterval(setUpJoinedGame, 1000)
-const checkGame = setInterval(onGetGame, 1000)
+const boardUpdate = setInterval(setUpJoinedGame, 50)
+const checkGame = setInterval(onGetGame, 50)
 let user
 
 const assignClicks = function () {
