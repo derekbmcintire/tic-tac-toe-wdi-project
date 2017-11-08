@@ -4,7 +4,7 @@ const ui = require('./ui')
 const store = require('../store.js')
 const displays = require('./displays')
 
-/**************** SET UP ***********************************/
+/* --------------- SET UP ----------------- */
 
 // hide game container and sign in/sign up forms
 $('.game-container').hide()
@@ -12,7 +12,7 @@ $('#side-title-div').hide()
 $('#form-sign-in').hide()
 $('#form-sign-up').hide()
 
-/************* API SIGN IN/SIGN OUT *************************/
+/* ---------------  API SIGN IN/SIGN OUT ----------------- */
 
 // show sign in form
 const showSignIn = function () {
@@ -65,7 +65,7 @@ const onChangePassword = function (event) {
     .catch(ui.changePasswordFailure)
 }
 
-/***************** API GAME HANDLERS ********************/
+/* ---------------  API GAME HANDLERS ----------------- */
 
 // on create game
 const onCreateGame = function (event) {
@@ -90,7 +90,7 @@ const onGetGames = function (event) {
     .catch(ui.getGamesFailure)
 }
 
-/***************** GAME LOGIC ************************/
+/* ---------------  GAME LOGIC ----------------- */
 
 let wins1 = 0
 let wins2 = 0
@@ -267,7 +267,7 @@ const displayWinner = function () {
   }
 }
 
-/************ Computer Game Logic *********************/
+/* ---------------  Computer Game Logic ----------------- */
 
 // on comp play click
 const onCompPlay = function () {
