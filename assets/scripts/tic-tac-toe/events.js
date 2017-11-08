@@ -147,6 +147,7 @@ const trackMove = function (square) {
 // add symbols to board and disable click function
 const onSquareClick = function () {
   if (playComp) {
+    $('.square').off('click')
     if (player === 'X') {
       $(this).text('X')
       store.currentGameState.game.cell.value = 'X'
@@ -175,9 +176,6 @@ const onSquareClick = function () {
     setTimeout(function () {
       compDecide()
     }, 1000)
-  }
-  if (playComp) {
-    $('.square').off('click')
   }
 }
 
@@ -271,6 +269,19 @@ const displayWinner = function () {
   }
 }
 
+// add click event to empty usedSquares
+const addClickAgain = function () {
+  for (let i = 0; i < 9; i++) {
+    const empty = []
+    if (!usedSquares.includes(i.toString())) {
+      empty.push(i.toString())
+    }
+    empty.map((x) => {
+      $('#' + x).on('click', onSquareClick)
+    })
+  }
+}
+
 /************ Computer Game Logic *********************/
 
 // on comp play click
@@ -334,8 +345,8 @@ function compMove (squareChoice) {
       }
       checkTie()
       moved = true
-      $('.square').on('click', onSquareClick)
     }
+    addClickAgain()
   }
 }
 
