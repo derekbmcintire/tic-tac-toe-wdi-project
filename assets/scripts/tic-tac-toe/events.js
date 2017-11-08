@@ -268,6 +268,19 @@ const displayWinner = function () {
   }
 }
 
+// add click event to empty usedSquares
+const addClickAgain = function () {
+  for (let i = 0; i < 9; i++) {
+    const empty = []
+    if (!usedSquares.includes(i.toString())) {
+      empty.push(i.toString())
+    }
+    empty.map((x) => {
+      $('#' + x).on('click', onSquareClick)
+    })
+  }
+}
+
 /* ---------------  Computer Game Logic ----------------- */
 
 // on comp play click
@@ -315,6 +328,7 @@ function randomChoice () {
 // computer chooses a square
 function compMove (squareChoice) {
   if (!moved) {
+    $('.square').off('click')
     const squareId = '#' + squareChoice
     if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
       comp === 'X' ? $(squareId).text('X') : $(squareId).text('O')
