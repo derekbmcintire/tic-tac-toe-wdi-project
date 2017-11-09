@@ -301,6 +301,12 @@ const addClickAgain = function () {
 
 // on comp play click
 const onCompPlay = function () {
+  clearGame()
+  $('#info').hide()
+  $('#1-wins').text('0')
+  $('#2-wins').text('0')
+  wins1 = 0
+  wins2 = 0
   if (!playComp) {
     $('#on-off').css({'float': 'right', 'background-color': '#00FF00'})
     $('#current-mode').text('Player vs Computer')
