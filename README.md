@@ -50,9 +50,5 @@ In addition to the basic requirements, I added some special features.
   ## Wireframe
 ![Tic Tac Toe Wireframe](https://c1.staticflickr.com/5/4555/38186861432_20845afb1a_z.jpg)
 
-## Bugs
-
-There is at least one bug I am aware of when playing against the computer.  The computers move is set to delay for one second to give the illusion of playing against another player who is taking time to make their move.  During that one second delay, the user may click as many squares as possible.  I need to figure out a way to turn the click function off while the computer is making its move, and then re-add the click events to only the empty squares after the computer has made it's move.
-
 ## Updates
 I have been working on a feature to let a second player join a game, and I have it mostly working, but it has quite a few bugs.  So in the future I plan to update and work on that as well as smooth out the player vs. computer feature.
