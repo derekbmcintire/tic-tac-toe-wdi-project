@@ -122,7 +122,6 @@ const win = [
 
 // check for tie
 const checkTie = function () {
-  // const used = xTrack.concat(oTrack)
   if (usedSquares.length === 9 && !winner) {
     store.currentGameState.game.over = true
     $('#info').text('It\'s a tie!')
@@ -144,25 +143,38 @@ const trackMove = function (square) {
   }
 }
 
-// add symbols to board and disable click function
-const onSquareClick = function () {
-  if (playComp) {
-    $('.square').off('click')
-    if (player === 'X') {
-      $(this).text('X')
-      store.currentGameState.game.cell.value = 'X'
-    } else {
-      $(this).text('O')
-      store.currentGameState.game.cell.value = 'O'
-    }
+// execute this if clicking on a square in player vs comp mode
+const playCompClick = function (square) {
+  $('.square').off('click')
+  // put X in square if player is X
+  if (player === 'X') {
+    $(square).text('X')
+    store.currentGameState.game.cell.value = 'X'
   } else {
-    const currentLetter = xTurn ? 'X' : 'O'
-    $(this).text(currentLetter)
-    store.currentGameState.game.cell.value = currentLetter
+    // put O in square if player is O
+    $(square).text('O')
+    store.currentGameState.game.cell.value = 'O'
   }
-  $(this).off('click')
-  store.currentGameState.game.cell.index = this.id
-  trackMove(this)
+  // if there is no winner and the game is still going, computer makes a move
+  if (!winner && gameOn) {
+    setTimeout(function () {
+      compDecide()
+    }, 1000)
+  }
+}
+
+// execute this if clicking on a square in player vs player mode
+const playVsPlay = function (square) {
+  const currentLetter = xTurn ? 'X' : 'O'
+  $(square).text(currentLetter)
+  store.currentGameState.game.cell.value = currentLetter
+}
+
+// execute this on every square click
+const allClick = function (square) {
+  $(square).off('click')
+  store.currentGameState.game.cell.index = square.id
+  trackMove(square)
   checkWin(xTrack, 'X')
   checkWin(oTrack, 'O')
   usedSquares = xTrack.concat(oTrack)
@@ -172,14 +184,19 @@ const onSquareClick = function () {
   checkTie()
   onUpdateGame()
   moved = false
-  if (!winner && playComp && gameOn) {
-    setTimeout(function () {
-      compDecide()
-    }, 1000)
-  }
 }
 
-// add click event to all squares
+// add symbols to board and disable click function
+const onSquareClick = function () {
+  if (playComp) {
+    playCompClick(this)
+  } else {
+    playVsPlay(this)
+  }
+  allClick(this)
+}
+
+// add click event to all squares, reset variables and display turn
 const startGame = function () {
   gameOn = true
   xTurn = true
@@ -209,9 +226,12 @@ $('#new-game').on('click', function () {
   clearGame()
   $('#info').show()
   startGame()
+  // if playing in player vs comp mode, set symbols and if comp is X, comp
+  // makes first move
   if (playComp) {
     changeSymbol()
     if (comp === 'X') {
+      $('.square').off('click')
       setTimeout(function () {
         compDecide()
       }, 500)
@@ -222,6 +242,8 @@ $('#new-game').on('click', function () {
 // check for win
 function checkWin (tracked, symbol) {
   for (let i = 0; i < win.length; i++) {
+    // iterate through winning combinations and check if the passed array
+    // contains a winning combination
     if (
       tracked.includes(win[i][0]) &&
       tracked.includes(win[i][1]) &&
@@ -240,36 +262,46 @@ const displayTurn = function () {
   $('#info').text(currentPlayer + '\'s turn!')
 }
 
-// display winner in the info element and disable squares
+// display winner in the info element and disable squares if winner is true
 const displayWinner = function () {
   if (winner) {
     displays.displayFlashes()
     store.currentGameState.game.over = true
+
+    // increases the wins under a users name
+    const adWin = function (x) {
+      if (x === 1) {
+        wins1++
+        $('#1-wins').text(wins1)
+      } else if (x === 2) {
+        wins2++
+        $('#2-wins').text(wins2)
+      }
+    }
+
+    // if in player vs player mode adds to winners wins
     if (!playComp) {
       const winningPlayer = xTurn ? '2' : '1'
       if (winningPlayer === '1') {
-        $('#1-wins').text(wins1 + 1)
-        wins1++
+        adWin(1)
       } else {
-        $('#2-wins').text(wins2 + 1)
-        wins2++
+        adWin(2)
       }
       $('#info').text('Player ' + winningPlayer + ' has won!')
     } else if (playComp) {
+      // if in player vs comp mode adds to winners wins
       if (comp === whoWon) {
         $('#info').text('You lost to the computer!')
-        $('#2-wins').text(wins2 + 1)
-        wins2++
+        adWin(2)
       } else {
         $('#info').text('You beat the computer!')
-        $('#1-wins').text(wins1 + 1)
-        wins1++
+        adWin(1)
       }
     }
   }
 }
 
-// have user and comp switch X and O after each games
+// have user and comp switch X and O after each game
 const changeSymbol = function () {
   if (player === 'X') {
     $('#player-2-symbol').html('X')
@@ -299,7 +331,25 @@ const addClickAgain = function () {
 
 /* ---------------  Computer Game Logic ----------------- */
 
-// on comp play click
+// when turning player vs comp mode on
+const compOn = function () {
+  $('#on-off').css({'float': 'right', 'background-color': '#00FF00'})
+  $('#current-mode').text('Player vs Computer')
+  $('#p2').text('Computer')
+  playComp = true
+}
+
+// when turning player vs comp mode off
+const compOff = function () {
+  $('#on-off').css({'float': 'left', 'background-color': '#8B1A1A'})
+  $('#current-mode').text('Player vs Player')
+  $('#p2').text('Player')
+  $('#player-2-symbol').html('O')
+  $('#player-1-symbol').html('X')
+  playComp = false
+}
+
+// when user clicks change mode
 const onCompPlay = function () {
   clearGame()
   $('#info').hide()
@@ -308,34 +358,11 @@ const onCompPlay = function () {
   wins1 = 0
   wins2 = 0
   if (!playComp) {
-    $('#on-off').css({'float': 'right', 'background-color': '#00FF00'})
-    $('#current-mode').text('Player vs Computer')
-    $('#p2').text('Computer')
-    // whoGoesFirst()
-    playComp = true
+    compOn()
   } else if (playComp) {
-    $('#on-off').css({'float': 'left', 'background-color': '#8B1A1A'})
-    $('#current-mode').text('Player vs Player')
-    $('#p2').text('Player')
-    $('#player-2-symbol').html('O')
-    $('#player-1-symbol').html('X')
-    playComp = false
+    compOff()
   }
 }
-
-// determines if computer or user is X - x always goes first
-// const whoGoesFirst = function () {
-//   const x = Math.floor(1 + Math.random() * 2)
-//   if (x === 2) {
-//     $('#player-2-symbol').html('X')
-//     $('#player-1-symbol').html('O')
-//     player = 'O'
-//     comp = 'X'
-//   } else {
-//     player = 'X'
-//     comp = 'O'
-//   }
-// }
 
 // tells computer to choose a random square
 function randomChoice () {
@@ -352,6 +379,7 @@ function compMove (squareChoice) {
   if (!moved) {
     $('.square').off('click')
     const squareId = '#' + squareChoice
+    // makes the computers move and checks for wins and ties
     if ((comp === 'X' && xTurn) || (comp === 'O' && !xTurn)) {
       comp === 'X' ? $(squareId).text('X') : $(squareId).text('O')
       xTurn === true ? xTrack.push(squareChoice) : oTrack.push(squareChoice)
@@ -413,6 +441,7 @@ function compDecide () {
   } else if (!usedSquares.includes('4')) {
     compMove('4')
   } else {
+    // loops through possible wins for a winning move
     for (let i = 0; i < possibleWin.length; i++) {
       if (
         usedSquares.includes(possibleWin[i][0]) &&
@@ -431,7 +460,7 @@ function compDecide () {
         compMove(possibleWin[i][0])
       }
     }
-
+    // loops through possible losses to block a potential win by the user
     for (let i = 0; i < possibleLoss.length; i++) {
       if (
         usedSquares.includes(possibleLoss[i][0]) &&
@@ -450,7 +479,7 @@ function compDecide () {
         compMove(possibleLoss[i][0])
       }
     }
-
+    // if there isn't a winning move, and no need to block a win, then this loops through potential wins and chooses a second square in a winning combination
     for (let i = 0; i < possibleWin.length; i++) {
       if (usedSquares.includes(possibleWin[i][0])) {
         compMove(possibleWin[i][1])
@@ -460,17 +489,7 @@ function compDecide () {
         compMove(possibleWin[i][0])
       }
     }
-
-    for (let i = 0; i < possibleLoss.length; i++) {
-      if (usedSquares.includes(possibleLoss[i][0])) {
-        compMove(possibleLoss[i][1])
-      } else if (usedSquares.includes(possibleLoss[i][1])) {
-        compMove(possibleLoss[i][2])
-      } else if (usedSquares.includes(possibleLoss[i][2])) {
-        compMove(possibleLoss[i][0])
-      }
-    }
-
+    // chooses a random square
     if (winner === false && gameOn) {
       randomChoice()
     }
