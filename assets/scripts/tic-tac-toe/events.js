@@ -231,6 +231,7 @@ $('#new-game').on('click', function () {
   if (playComp) {
     changeSymbol()
     if (comp === 'X') {
+      $('.square').off('click')
       setTimeout(function () {
         compDecide()
       }, 500)
