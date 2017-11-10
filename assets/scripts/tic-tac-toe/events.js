@@ -343,7 +343,7 @@ const compOn = function () {
 const compOff = function () {
   $('#on-off').css({'float': 'left', 'background-color': '#8B1A1A'})
   $('#current-mode').text('Player vs Player')
-  $('#p2').text('Player')
+  $('#p2').text('Player 2')
   $('#player-2-symbol').html('O')
   $('#player-1-symbol').html('X')
   playComp = false
