@@ -21,7 +21,7 @@ const displayFlashes = function () {
     }, timer)
     timer = timer + 33
   }
-$('.square').css('background-color', 'none')
+  $('.square').css('background-color', 'none')
 }
 
 module.exports = {

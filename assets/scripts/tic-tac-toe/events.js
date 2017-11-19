@@ -497,6 +497,8 @@ function compDecide () {
   }
 }
 
+// master branch is failing to update game but this branch works fine, so I have to make a change here so I can merge them again.
+
 module.exports = {
   onSignUp,
   onSignIn,
