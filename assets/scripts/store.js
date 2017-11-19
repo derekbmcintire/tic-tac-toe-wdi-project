@@ -5,7 +5,7 @@ const store = {
     'game': {
       'cell': {
       },
-      'over': null
+      'over': false
     }
   }
 }
