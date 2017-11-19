@@ -2,10 +2,10 @@
 
 const store = {
   currentGameState: {
-    game: {
-      cell: {
+    'game': {
+      'cell': {
       },
-      over: false
+      'over': null
     }
   }
 }
