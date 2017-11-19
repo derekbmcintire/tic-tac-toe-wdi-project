@@ -77,7 +77,7 @@ const onCreateGame = function (event) {
 
 // on update game
 const onUpdateGame = function (event) {
-  api.updateGame(store.currentGameState)
+  api.updateGame()
     .then(ui.updateGameSuccess)
     .catch(ui.updateGameFailure)
 }
@@ -106,6 +106,7 @@ let usedSquares = []
 let playComp = false
 let player
 let comp
+// moved lets the computer know it has already made a move when looping through possible moves, so it will not move more than once a turn
 let moved
 let gameOn = false
 let whoWon = ''
@@ -222,7 +223,7 @@ const endGame = function () {
 }
 
 // start a new game on button click
-$('#new-game').on('click', function () {
+const newGame = function () {
   clearGame()
   $('#info').show()
   startGame()
@@ -237,7 +238,7 @@ $('#new-game').on('click', function () {
       }, 500)
     }
   }
-})
+}
 
 // check for win
 function checkWin (tracked, symbol) {
@@ -505,6 +506,7 @@ module.exports = {
   onChangePassword,
   onCreateGame,
   endGame,
+  newGame,
   onUpdateGame,
   onGetGames,
   onCompPlay

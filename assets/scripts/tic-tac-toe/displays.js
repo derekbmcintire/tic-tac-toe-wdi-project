@@ -10,7 +10,7 @@ const winFlash = function () {
   $(currSq).css('background-color', currCol)
   setTimeout(function () {
     $(currSq).css('background-color', 'transparent')
-  }, 200)
+  }, 300)
 }
 
 const displayFlashes = function () {
@@ -21,6 +21,7 @@ const displayFlashes = function () {
     }, timer)
     timer = timer + 33
   }
+$('.square').css('background-color', 'none')
 }
 
 module.exports = {
