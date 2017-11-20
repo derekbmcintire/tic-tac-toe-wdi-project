@@ -156,12 +156,7 @@ const playCompClick = function (square) {
     $(square).text('O')
     store.currentGameState.game.cell.value = 'O'
   }
-  // if there is no winner and the game is still going, computer makes a move
-  if (!winner && gameOn) {
-    setTimeout(function () {
-      compDecide()
-    }, 1000)
-  }
+
 }
 
 // execute this if clicking on a square in player vs player mode
@@ -195,6 +190,14 @@ const onSquareClick = function () {
     playVsPlay(this)
   }
   allClick(this)
+  if (playComp) {
+  // if there is no winner and the game is still going, computer makes a move
+  if (!winner && gameOn) {
+    setTimeout(function () {
+      compDecide()
+    }, 1000)
+  }
+}
 }
 
 // add click event to all squares, reset variables and display turn
@@ -220,6 +223,7 @@ const clearGame = function () {
 const endGame = function () {
   $('.square').off('click')
   gameOn = false
+  console.log('game ended')
 }
 
 // start a new game on button click
@@ -397,7 +401,9 @@ function compMove (squareChoice) {
       checkTie()
       moved = true
     }
-    addClickAgain()
+    if (winner === false) {
+      addClickAgain()
+    }
   }
 }
 
