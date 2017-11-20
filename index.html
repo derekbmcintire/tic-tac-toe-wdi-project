@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tic Tac Toe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Do not add `link` tags-->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Do not add `script` tags-->
+  <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+  <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+</head>
+
+<body>
+
+  <!-- Sign In/Up Container-->
+  <div class="sign-in-container">
+    <h1 class='sign-in-title'>Tic Tac Toe</h1>
+    <h4 class="sign-in-test">Sign in to play!</h4>
+    <div id="button-wrap">
+      <button class="sign-btn" id="sign-in">
+      Sign In
+    </button>
+      <h3 class="sign-in-text">or</h3>
+      <button class="sign-btn" id="sign-up">
+      Sign Up
+    </button> <br />
+    </div>
+
+    <!-- Sign In Form -->
+    <form class="sign-in-up" id="form-sign-in">
+      <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
+      <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
+      <button type="submit" class="btn btn-primary">Submit</button> <br />
+      <small>Looking for <a class="back-to" id="back-to-sign-up">Sign Up</a>?</small>
+      <h3 id="message-in"></h3>
+    </form>
+
+    <!-- Sign Up Form -->
+    <form class="sign-in-up" id="form-sign-up">
+      <input type="email" name="credentials[email]" class="form-control" placeholder="Enter email">
+      <input type="password" name="credentials[password]" class="form-control" placeholder="Enter password">
+      <input type="password" name="credentials[password_confirmation]" class="form-control" placeholder="Re-enter password">
+      <button type="submit" class="btn btn-primary">Submit</button> <br />
+      <small>Looking for <a class= "back-to" id="back-to-sign-in">Sign In</a>?</small>
+      <h3 id="message-up"></h3>
+    </form>
+  </div>
+
+  <div class="side-title" id="side-title-div">
+    <h1 class="side-text">Tic Tac Toe</h1>
+  </div>
+
+  <!-- Game Container -->
+  <!-- Nav Bar -->
+  <div class="game-container">
+    <nav>
+        <p class="display-name" id="user-display">
+        </p>
+        <button type="button" id="game-history" class="log" data-toggle="modal" data-target="#history-modal">
+          Game History
+        </button> |
+      <button type="button" class="log" data-toggle="modal" data-target="#change-password-modal">
+          Change Password
+        </button> |
+      <button type="button" class="log" id="sign-out-button">
+          Sign Out
+        </button> |
+    </nav>
+
+    <!-- Change Password Modal -->
+    <div class="modal fade" id="change-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Modal Body -->
+            <form class="sign-in-up" id="form-change-password">
+              <input type="password" id="old-password" name="passwords[old]" class="form-control" placeholder="Enter old password">
+              <input type="password" id="new-password" name="passwords[new]" class="form-control" placeholder="Enter new password">
+              <button type="submit" class="btn btn-primary">Submit</button> <br />
+            </form>
+            <h3 id="message-change"></h3>
+            <!-- End Modal Body -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="close-change-password" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game History Modal -->
+    <div class="modal fade" id="history-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Game History</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Modal Body -->
+            <h2 class="player-history" id="player-history"></h2>
+            <h3>Games Played:<span id="games-played"></span></h3>
+            <h3>Games Won:<span id="games-won"></span></h3>
+            <h3>Win Average:<span id="win-avg"></span>%</h3>
+            <!-- End Modal Body -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Modals-->
+
+    <br />
+
+    <!-- Info and Score Section -->
+    <section class="top-wrap">
+
+
+
+          <div class="top top-left">
+
+            <h4 id="p1">Player 1</h4>
+            <div class="symbol" id="player-1-symbol">
+              X
+            </div>
+            <!-- <h4 class="score">Wins: <span id="1-wins"></span></h4> -->
+          </div>
+
+          <div class="top top-right">
+            <h4 id="p2">Player 2</h4>
+            <div class="symbol" id="player-2-symbol">
+              O
+            </div>
+            <!-- <h4 class="score">Wins: <span id="2-wins"></span></h4> -->
+          </div>
+          <!-- uncoment wins after fixing bug -->
+
+        </section>
+
+    <br />
+
+    <div class="play-mode">
+      <h4>Play Mode:</h4>
+    <div class="comp-play-btn" id="comp-play">
+      <div class="on-off" id="on-off">
+      </div>
+    </div>
+    <p id="current-mode">Player vs Player</p>
+    </div>
+
+        <button class="new-game-btn" id="new-game">New Game</button>
+        <div class="message">
+          <h2 id='info'>X's turn!</h2>
+        </div>
+
+    <br />
+
+    <!-- Game Board-->
+    <main class="game-board-wrap">
+      <div class="top-row">
+        <div class="square sq-zero" id="0"></div>
+        <div class="square sq-one" id="1"></div>
+        <div class="square sq-two" id="2"></div>
+      </div>
+      <div class="middle-row">
+        <div class="square sq-three" id="3"></div>
+        <div class="square sq-four" id="4"></div>
+        <div class="square sq-five" id="5"></div>
+      </div>
+      <div class="bottom-row">
+        <div class="square sq-six" id="6"></div>
+        <div class="square sq-seven" id="7"></div>
+        <div class="square sq-eight" id="8"></div>
+      </div>
+    </main>
+
+    <footer>
+      <h2 class="credit">Coded by Derek McIntire</h2>
+    </footer>
+    <!-- End Game Container-->
+  </div>
+
+</body>
+
+</html>
