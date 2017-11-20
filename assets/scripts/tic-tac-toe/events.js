@@ -192,12 +192,12 @@ const onSquareClick = function () {
   allClick(this)
   if (playComp) {
   // if there is no winner and the game is still going, computer makes a move
-  if (!winner && gameOn) {
-    setTimeout(function () {
-      compDecide()
-    }, 1000)
+    if (!winner && gameOn) {
+      setTimeout(function () {
+        compDecide()
+      }, 1000)
+    }
   }
-}
 }
 
 // add click event to all squares, reset variables and display turn
